@@ -49,46 +49,46 @@ function createData(OrderBy, OrderId, OrderDate, Amount, Status) {
 }
 
 const rows = [
-  createData("Ram", 1, "2023-01-03", 4500, "Delivered"),
-  createData("Shyam", 2, "2023-04-04", 5000, "Delivered"),
-  createData("Gita", 3, "2023-01-05", 6000, "Pending"),
-  createData("Hari", 4, "2022-07-02", 7000, "Delivered"),
-  createData("Sita", 5, "2023-01-07", 8000, "Delivered"),
-  createData("Ravi", 6, "2023-01-01", 9000, "Cancelled"),
-  createData("Priya", 7, "2023-03-09", 10000, "Delivered"),
-  createData("Amit", 8, "2022-01-10", 11000, "Delivered"),
-  createData("Mohan", 9, "2023-01-11", 12000, "Delivered"),
-  createData("Krishna", 10, "2022-04-12", 13000, "Delivered"),
-  createData("Radha", 11, "2023-01-13", 14000, "Delivered"),
-  createData("Vikas", 12, "2023-01-14", 15000, "Delivered"),
-  createData("Deepak", 13, "2023-01-15", 16000, "Delivered"),
-  createData("Kavita", 14, "2022-09-16", 17000, "Delivered"),
-  createData("Aarti", 15, "2022-01-17", 18000, "Delivered"),
-  createData("Neha", 16, "2023-01-18", 19000, "Delivered"),
-  createData("Rohan", 17, "2023-08-19", 20000, "Delivered"),
-  createData("Raj", 18, "2023-01-20", 21000, "Delivered"),
-  createData("Aman", 19, "2023-01-21", 22000, "Delivered"),
-  createData("Sangeeta", 20, "2023-01-22", 23000, "Delivered"),
-  createData("Ram", 1, "2023-01-03", 4500, "Delivered"),
-  createData("Shyam", 2, "2023-07-04", 5000, "Delivered"),
-  createData("Gita", 3, "2023-01-05", 6000, "Pending"),
-  createData("Hari", 4, "2023-01-06", 7000, "Delivered"),
-  createData("Sita", 5, "2023-01-07", 8000, "Delivered"),
-  createData("Ravi", 6, "2023-01-08", 9000, "Cancelled"),
-  createData("Priya", 7, "2023-01-09", 10000, "Delivered"),
-  createData("Amit", 8, "2023-01-10", 11000, "Delivered"),
-  createData("Mohan", 9, "2022-01-11", 12000, "Delivered"),
-  createData("Krishna", 10, "2023-01-12", 13000, "Delivered"),
-  createData("Radha", 11, "2023-01-13", 14000, "Delivered"),
-  createData("Vikas", 12, "2023-01-14", 15000, "Delivered"),
-  createData("Deepak", 13, "2023-01-15", 16000, "Delivered"),
-  createData("Kavita", 14, "2023-09-16", 17000, "Delivered"),
-  createData("Aarti", 15, "2023-01-17", 18000, "Delivered"),
-  createData("Neha", 16, "2023-01-18", 19000, "Delivered"),
-  createData("Rohan", 17, "2023-01-19", 20000, "Delivered"),
-  createData("Raj", 18, "2023-01-20", 21000, "Delivered"),
-  createData("Aman", 19, "2023-01-21", 22000, "Delivered"),
-  createData("Sangeeta", 20, "2023-01-22", 23000, "Delivered"),
+  createData("Ram", 1, "January 1,2023", 4500, "Delivered"),
+  createData("Shyam", 2, "January 12,2023", 5000, "Delivered"),
+  createData("Gita", 3, "January 10,2023", 6000, "Pending"),
+  createData("Hari", 4, "January 16,2023", 7000, "Delivered"),
+  createData("Sita", 5, "January 19,2023", 8000, "Delivered"),
+  createData("Ravi", 6, "January 14,2023", 9000, "Cancelled"),
+  createData("Priya", 7, "January 16,2023", 10000, "Delivered"),
+  createData("Amit", 8, "January 17,2023", 11000, "Delivered"),
+  createData("Mohan", 9, "January 7,2023", 12000, "Delivered"),
+  createData("Krishna", 10, "January 9,2023", 13000, "Delivered"),
+  createData("Radha", 11, "January 6,2023", 14000, "Delivered"),
+  createData("Vikas", 12, "January 1,2023", 15000, "Delivered"),
+  createData("Deepak", 13, "February 8,2022", 16000, "Delivered"),
+  createData("Kavita", 14, "February 6,2022", 17000, "Delivered"),
+  createData("Aarti", 15, "February 9,2022", 18000, "Delivered"),
+  createData("Neha", 16, "February 16,2022", 19000, "Delivered"),
+  createData("Rohan", 17, "March 11,2022", 20000, "Delivered"),
+  createData("Raj", 18, "March 10,2022", 21000, "Delivered"),
+  createData("Aman", 19, "March 15,2022", 22000, "Delivered"),
+  createData("Sangeeta", 20, "March 19,2022", 23000, "Delivered"),
+  createData("Ram", 1, "March 21,2022", 4500, "Delivered"),
+  createData("Shyam", 2, "March 10,2022", 5000, "Delivered"),
+  createData("Gita", 3, "March 21,2022", 6000, "Pending"),
+  createData("Hari", 4, "2March 22,2022", 7000, "Delivered"),
+  createData("Sita", 5, "March 28,2022", 8000, "Delivered"),
+  createData("Ravi", 6, "March 24,2022", 9000, "Cancelled"),
+  createData("Priya", 7, "March 31,2022", 10000, "Delivered"),
+  createData("Amit", 8, "March 28,2022", 11000, "Delivered"),
+  createData("Mohan", 9, "February 6,2022", 12000, "Delivered"),
+  createData("Krishna", 10, "February 8,2022", 13000, "Delivered"),
+  createData("Radha", 11, "February 5,2022", 14000, "Delivered"),
+  createData("Vikas", 12, "2February 7,2022", 15000, "Delivered"),
+  createData("Deepak", 13, "February 11,2022", 16000, "Delivered"),
+  createData("Kavita", 14, "February 13,2022", 17000, "Delivered"),
+  createData("Aarti", 15, "February 12,2022", 18000, "Delivered"),
+  createData("Neha", 16, "February 18,2022", 19000, "Delivered"),
+  createData("Rohan", 17, "February 14,2022", 20000, "Delivered"),
+  createData("Raj", 18, "February 23,2022", 21000, "Delivered"),
+  createData("Aman", 19, "February 22,2022", 22000, "Delivered"),
+  createData("Sangeeta", 20, "February 6,2022", 23000, "Delivered"),
 ];
 export default function OrderHistory() {
   const [range, setRange] = React.useState([
@@ -98,9 +98,10 @@ export default function OrderHistory() {
   const startDate = range[0];
   const endDate = range[1];
   const filteredRows = rows.filter((row) => {
-    const rowDate = new Date(row.OrderDate);
-    return rowDate >= new Date(startDate) && rowDate <= new Date(endDate);
+    const rowDate = dayjs(row.OrderDate);
+    return rowDate.isBetween(startDate, endDate, null, "[]");
   });
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
 
@@ -115,36 +116,51 @@ export default function OrderHistory() {
 
   return (
     <div>
-      <Grid
-        container
-        span={2}
+      <Paper
+        elevation={1}
         sx={{
-          marginLeft: "5%",
-          marginTop: "3%",
-          flexWrap: "nowrap",
-          width: "70vw",
+          width: "79vw",
+          height: "10vh",
+          marginLeft: "3rem",
+          marginTop: "1rem",
         }}
       >
-        <Grid>
-          <h2 style={{ fontSize: "30px", width: "45vw" }}>Order History</h2>
-        </Grid>
-        <Grid>
-          <Paper sx={{ width: "20vw", marginLeft: "67%" }}>
+        <Grid
+          container
+          span={2}
+          sx={{
+            flexWrap: "nowrap",
+          }}
+        >
+          <h2
+            style={{
+              fontSize: "30px",
+              width: "45vw",
+              marginLeft: "1rem",
+              marginTop: "1rem",
+            }}
+          >
+            Order History
+          </h2>
+          <Grid sx={{ marginTop: "9px", marginLeft: "3rem" }}>
             <DateRangePicker range={range} setRange={setRange} />
-          </Paper>
+          </Grid>
         </Grid>
-      </Grid>
+      </Paper>
       <Orders />
-      <h2 style={{ paddingLeft: "5%", marginTop: "3%" }}>All Oders</h2>
+
       <Paper
+        elevation={1}
         sx={{
           width: "80vw",
+          height: "60vh",
           overflow: "hidden",
-          marginLeft: "62px",
-          marginTop: "35px",
+          marginLeft: "3rem",
+          marginTop: "2rem",
         }}
       >
-        <TableContainer sx={{ height: "50vh" }}>
+        <h2 style={{ paddingLeft: "1rem", marginTop: "1rem" }}>All Oders</h2>
+        <TableContainer sx={{ height: "48vh" }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>

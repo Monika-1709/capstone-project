@@ -5,7 +5,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { Box, Paper } from "@mui/material";
 import DateRangePicker from "../Components/DateRangePicker";
 import Comments from "../Components/Comments";
-//import { DateRangePicker as DateRange } from '@mui/x-date-pickers-pro/DateRangePicker';
+
 
 function Reviews() {
   const [range, setRange] = React.useState([
@@ -16,31 +16,37 @@ function Reviews() {
   const endDate = range[1];
 
   return (
-    <div>
-      <Grid container spacing={2} sx={{ paddingTop: "5%" }}>
-        <Grid xs={6} md={8} sx={{ paddingLeft: "10%" }}>
-          <h1>Reviews</h1>
-        </Grid>
-        <Grid xs={6} md={4} sx={{ marginLeft: "-8%" }}>
-          <Paper sx={{ width: "25vw" }}>
+    <Box>
+      <Paper
+        elevation={1}
+        sx={{
+          width: "72vw",
+          height: "9vh",
+          marginLeft: "7.5rem",
+          marginTop: "2rem",
+        }}
+      >
+        <Grid container spacing={2} sx={{ width: "72vw" }}>
+          <h1
+            style={{ width: "35vw", marginLeft: "1rem", marginTop: "1.2rem" }}
+          >
+            Reviews
+          </h1>
+          <Grid sx={{ marginLeft: "6rem" }}>
             <DateRangePicker range={range} setRange={setRange} />
-          </Paper>
+          </Grid>
         </Grid>
-      </Grid>
+      </Paper>
+
       <Grid container spacing={3} sx={{ paddingTop: "25px" }}>
         <Grid xs={4} sx={{ paddingLeft: "10%" }}>
           <Paper
-            elevation={0}
+            elevation={1}
             sx={{
-              "&": {
-                paddingLeft: "15px",
-                width: "320px",
-                height: "120px",
-                paddingTop: "10px",
-              },
-              "&:hover": {
-                transform: "scale(1.1)",
-              },
+              paddingLeft: "15px",
+              width: "320px",
+              height: "120px",
+              paddingTop: "10px",
             }}
           >
             <h4>Total Reviews</h4>
@@ -52,21 +58,16 @@ function Reviews() {
         </Grid>
         <Grid xs={4} sx={{ paddingLeft: "65px" }}>
           <Paper
-            elevation={0}
+            elevation={1}
             sx={{
-              "&": {
-                paddingLeft: "15px",
-                width: "320px",
-                height: "120px",
-                paddingTop: "10px",
-              },
-              "&:hover": {
-                transform: "scale(1.1)",
-              },
+              paddingLeft: "15px",
+              width: "320px",
+              height: "120px",
+              paddingTop: "10px",
             }}
           >
             <h4>Average Rating</h4>
-            <div
+            <Box
               style={{
                 whiteSpace: "nowrap",
                 fontWeight: "bold",
@@ -82,7 +83,7 @@ function Reviews() {
                 size="small"
                 readOnly
               />
-            </div>
+            </Box>
             <p style={{ paddingTop: "3%", color: "gray" }}>
               Average rating on this year
             </p>
@@ -90,20 +91,15 @@ function Reviews() {
         </Grid>
         <Grid xs={4} sx={{ paddingLeft: "0px" }}>
           <Paper
-            elevation={0}
+            elevation={1}
             sx={{
-              "&": {
-                paddingLeft: "15px",
-                width: "320px",
-                height: "120px",
-                paddingTop: "10px",
-              },
-              "&:hover": {
-                transform: "scale(1.1)",
-              },
+              paddingLeft: "15px",
+              width: "320px",
+              height: "120px",
+              paddingTop: "10px",
             }}
           >
-            <div style={{ fontSize: "18px", fontWeight: "bold" }}>
+            <Box style={{ fontSize: "18px", fontWeight: "bold" }}>
               {" "}
               5
               <Rating
@@ -115,8 +111,8 @@ function Reviews() {
                 sx={{ paddingLeft: "10px" }}
               />
               &nbsp;&nbsp;10.0k
-            </div>
-            <div style={{ fontSize: "18px", fontWeight: "bold" }}>
+            </Box>
+            <Box style={{ fontSize: "18px", fontWeight: "bold" }}>
               {" "}
               4
               <Rating
@@ -128,8 +124,8 @@ function Reviews() {
                 sx={{ paddingLeft: "10px" }}
               />
               &nbsp;&nbsp;1.0k
-            </div>
-            <div style={{ fontSize: "18px", fontWeight: "bold" }}>
+            </Box>
+            <Box style={{ fontSize: "18px", fontWeight: "bold" }}>
               {" "}
               3
               <Rating
@@ -141,8 +137,8 @@ function Reviews() {
                 sx={{ paddingLeft: "10px" }}
               />
               &nbsp;&nbsp;500
-            </div>
-            <div style={{ fontSize: "18px", fontWeight: "bold" }}>
+            </Box>
+            <Box style={{ fontSize: "18px", fontWeight: "bold" }}>
               {" "}
               2
               <Rating
@@ -154,8 +150,8 @@ function Reviews() {
                 sx={{ paddingLeft: "10px" }}
               />
               &nbsp;&nbsp;20
-            </div>
-            <div style={{ fontSize: "18px", fontWeight: "bold" }}>
+            </Box>
+            <Box style={{ fontSize: "18px", fontWeight: "bold" }}>
               {" "}
               1
               <Rating
@@ -167,25 +163,25 @@ function Reviews() {
                 sx={{ paddingLeft: "10px" }}
               />
               &nbsp;&nbsp;OK
-            </div>
+            </Box>
           </Paper>
         </Grid>
       </Grid>
       <Box sx={{ paddingLeft: "9%", paddingTop: "30px" }}>
         <Paper
-          elevation={0}
+          elevation={1}
           sx={{
             paddingLeft: "15px",
             width: "72vw",
             height: "60vh",
             overflowY: "auto",
           }}
-          variant="outlined"
+         
         >
           <Comments startDate={startDate} endDate={endDate} />
         </Paper>
       </Box>
-    </div>
+    </Box>
   );
 }
 

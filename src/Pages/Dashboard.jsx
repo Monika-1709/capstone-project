@@ -1,213 +1,228 @@
-import * as React from 'react';
-import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
-//import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-//import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import ReactEcharts from 'echarts-for-react';
-import { Box, Paper } from '@mui/material';
+import * as React from "react";
+import Grid from "@mui/material/Grid";
+import ReactEcharts from "echarts-for-react";
+import { Box, Paper } from "@mui/material";
+import RecentOrders from "../Components/RecentOrders";
+import Profile from "../Components/Profile";
+import Data1 from "../Components/OrderData";
+import SalesData from "../Components/SalesData";
+import UsersData from "../Components/UsersData";
 
-
-const option2 = {
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'shadow'
-    }
-  },
-  grid: {
-    left: '3%',
-    right: '4%',
-    bottom: '3%',
-    containLabel: true
-  },
-  xAxis: [
-    {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-      axisTick: {
-        alignWithLabel: true
-      }
-    }
-  ],
-  yAxis: [
-    {
-      type: 'value'
-    }
-  ],
-  series: [
-    {
-      name: 'Direct',
-      type: 'bar',
-      barWidth: '60%',
-      data: [10, 52, 200, 334, 390, 330, 220]
-    }
-  ]
-};
 const option = {
-  legend: {
-    top: 'bottom'
+  tooltip: {
+    trigger: "item",
   },
-  toolbox: {
-    show: true,
-    feature: {
-      mark: { show: true },
-      dataView: { show: true, readOnly: false },
-      restore: { show: true },
-      saveAsImage: { show: true }
-    }
+  legend: {
+    orient: "vertical",
+    left: "left",
+    top: "middle",
   },
   series: [
     {
-      name: 'Nightingale Chart',
-      type: 'pie',
-      radius: [25, 100],
-      center: ['50%', '50%'],
-      roseType: 'area',
-      itemStyle: {
-        borderRadius: 8
+      name: "Access From",
+      type: "pie",
+      radius: ["40%", "70%"],
+      avoidLabelOverlap: false,
+      label: {
+        show: false,
+        position: "center",
+      },
+      emphasis: {
+        label: {
+          show: true,
+          fontSize: 40,
+          fontWeight: "bold",
+        },
+      },
+      labelLine: {
+        show: true,
+        length: 20,
       },
       data: [
-        { value: 40, name: 'rose 1' },
-        { value: 38, name: 'rose 2' },
-        { value: 32, name: 'rose 3' },
-        { value: 30, name: 'rose 4' },
-        { value: 28, name: 'rose 5' },
-        { value: 22, name: 'rose 6' },
-
-      ]
-    }
-  ]
+        { value: 1048, name: "Delivered" },
+        { value: 735, name: "Dispatch" },
+        { value: 580, name: "Pending" },
+        { value: 484, name: "Cancelled" },
+      ],
+    },
+  ],
 };
 
 const op = {
-  // title: {
-  //   text: 'Stacked Line'
-  // },
   tooltip: {
-    trigger: 'axis'
+    trigger: "axis",
   },
   legend: {
-    data: [  'Video Ads', 'Direct', 'Search Engine']
+    data: ["Search Engine"],
   },
   grid: {
-    left: '3%',
-    right: '4%',
-    bottom: '3%',
-    containLabel: true
+    left: "3%",
+    right: "4%",
+    bottom: "3%",
+    containLabel: true,
   },
   toolGrid: {
     feature: {
-      saveAsImage: {}
-    }
+      saveAsImage: {},
+    },
   },
   xAxis: {
-    type: 'category',
+    type: "category",
     boundaryGap: false,
-    data: ['Mon', 'tuesday', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    data: ["Mon", "tuesday", "Wed", "Thu", "Fri", "Sat", "Sun"],
   },
   yAxis: {
-    type: 'value'
+    type: "value",
   },
   series: [
-    
     {
-      name: 'Video Ads',
-      type: 'line',
-      stack: 'Total',
-      data: [150, 232, 201, 154, 190, 330, 410]
+      name: "Visitors",
+      type: "line",
+      stack: "Total",
+      data: [820, 932, 901, 934, 1290, 1330, 1320],
     },
-    {
-      name: 'Direct',
-      type: 'line',
-      stack: 'Total',
-      data: [320, 332, 301, 334, 390, 330, 320]
+  ],
+};
+const option2 = {
+  tooltip: {
+    trigger: "axis",
+    axisPointer: {
+      type: "shadow",
     },
+  },
+  grid: {
+    left: "3%",
+    right: "4%",
+    bottom: "3%",
+    containLabel: true,
+  },
+  xAxis: [
     {
-      name: 'Search Engine',
-      type: 'line',
-      stack: 'Total',
-      data: [820, 932, 901, 934, 1290, 1330, 1320]
-    }
-  ]
+      type: "category",
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      axisTick: {
+        alignWithLabel: true,
+      },
+    },
+  ],
+  yAxis: [
+    {
+      type: "value",
+    },
+  ],
+  series: [
+    {
+      name: "Direct",
+      type: "bar",
+      barWidth: "55%",
+      data: [10, 52, 200, 334, 390, 330, 220],
+    },
+  ],
 };
 
-
-
-const card = (
-  <Card>
-    <CardContent>
-      <Typography sx={{ fontSize: 16,fontWeight:'bold' }} gutterBottom>
-         Total Order
-      </Typography>
-      <Typography >
-           2.5k+
-      </Typography>
-    </CardContent>
-  </Card>  
-  
-);
-
-
-
-
 export default function Dashboard() {
-  
   return (
-   <Box m='20px'>
-       <Box  justifyContent="space-between" alignItems="center">
-          <h2 style={{marginLeft:'20px'}}>Welcome to Dashboard</h2>
-       </Box>
-       <Grid container spacing={2} flexWrap="nowrap">
-          <Grid sx={{paddingTop:'5%'}}> 
-              <Grid 
-                  container spacing={3}
-                  sx={{marginLeft:'40px',gap:'25px'}}
-              >
-                
-                    <Grid sx={{width:'230px'}} >
-                      <Card >{card}</Card>
-                    </Grid>
-                    <Grid  sx={{width:'230px'}}  >
-                      <Card >{card}</Card>
-                    </Grid>
-                    <Grid  sx={{width:'230px'}} >
-                      <Card >{card}</Card>
-                    </Grid>
-            
-                </Grid>
-                <Grid  sx={{width:'740px',paddingTop:'2%',marginLeft:'40px'}}  >
-                  <Paper sx={{height:'250px'}}>
-                      <h2 style={{paddingTop:'2%',paddingLeft:'40px'}}>Total Visitors</h2> 
-                      <ReactEcharts
-                          option={op} 
-                          style={{ height: '200px',width: '700px',marginTop:'2px'} }
-                        /> 
-                  </Paper>
-                </Grid>
-          </Grid>  
-          <Grid  sx={{marginLeft:'40px',paddingTop:'37px'}}>
-                <Paper  sx={{width:'470px',height:'360px'}}>
-                  <h2 style={{paddingTop:'3%',paddingLeft:'15px'}}> Total Transaction</h2>
-                  <ReactEcharts option={option} />
-                </Paper>
-          </Grid>            
+    <Box>
+      <Paper
+        elevation={0}
+        variant="outlined"
+        sx={{ height: "9vh", width: "100%" }}
+      >
+        <Grid container spacing={2} flexWrap="nowrap">
+          <p
+            style={{
+              marginLeft: "3rem",
+              paddingTop: "35px",
+              fontWeight: "bold",
+              fontSize: "27px",
+              width: "67vw",
+            }}
+          >
+            Welcome to Dashboard
+          </p>
+
+          <Profile />
+          <Grid
+            sx={{ marginTop: "2.5rem", marginLeft: "8px", fontWeight: "bold" }}
+          >
+            <p>Sajib Suprio</p>
+          </Grid>
+        </Grid>
+      </Paper>
+
+      <Grid
+        container
+        spacing={3}
+        sx={{ paddingLeft: "50px", gap: "26px", paddingTop: "48px" }}
+        flexWrap="nowrap"
+      >
+        <Paper
+          elevation={3}
+          sx={{ width: "26.5vw", height: "16.5vh", borderRadius: "5px" }}
+        >
+          <Data1 />
+        </Paper>
+
+        <Paper
+          elevation={3}
+          sx={{ width: "26.5vw", height: "16.5vh", borderRadius: "5px" }}
+        >
+          <UsersData />
+        </Paper>
+
+        <Paper
+          elevation={3}
+          sx={{ width: "26.5vw", height: "16.5vh", borderRadius: "5px" }}
+        >
+          <SalesData />
+        </Paper>
       </Grid>
-      <Grid container spacing={2}  flexWrap="nowrap">
-          <Grid sx={{paddingTop:'3%',paddingLeft:'40px'}}>
-              <Paper  sx={{width:'740px',height:'400px'}}>
-                <h2 style={{paddingTop:'2%',paddingLeft:'15px'}}>Recent Orders</h2>
-                
-              </Paper>
-          </Grid>  
-          <Grid  sx={{paddingTop:'3%',paddingLeft:'40px'}}>
-              <Paper  sx={{width:'470px',height:'400px'}}> 
-                <h2 style={{paddingTop:'2%',paddingLeft:'15px'}}>Total Reviews</h2>
-                <ReactEcharts option={option2} />
-              </Paper>
-          </Grid>  
+
+      <Grid container spacing={2} flexWrap="nowrap">
+        <Grid sx={{ paddingTop: "37px", marginLeft: "40px" }}>
+          <Paper sx={{ width: "48.5vw", height: "34vh" }} elevation={3}>
+            <h2 style={{ paddingTop: "2%", paddingLeft: "20px" }}>
+              Recent Visitors
+            </h2>
+            <ReactEcharts
+              option={op}
+              style={{ height: "30vh", width: "45vw", marginTop: "-15px" }}
+            />
+          </Paper>
+        </Grid>
+
+        <Grid sx={{ marginLeft: "28px", paddingTop: "37px" }}>
+          <Paper sx={{ width: "32.5vw", height: "34vh" }} elevation={3}>
+            <h2 style={{ paddingTop: "3%", paddingLeft: "15px" }}>
+              {" "}
+              Order Status
+            </h2>
+            <ReactEcharts
+              option={option}
+              style={{ marginTop: "-20px", marginLeft: "3rem" }}
+            />
+          </Paper>
+        </Grid>
       </Grid>
-   </Box>
+
+      <Grid container spacing={2} flexWrap="nowrap">
+        <Grid sx={{ paddingTop: "2.5rem", paddingLeft: "40px" }}>
+          <Paper sx={{ width: "48.5vw", height: "29.5vh" }} elevation={3}>
+            <h2 style={{ paddingTop: "2%", paddingLeft: "15px" }}>
+              Recent Orders
+            </h2>
+            <RecentOrders />
+          </Paper>
+        </Grid>
+        <Grid sx={{ paddingTop: "2.5rem", paddingLeft: "28px" }}>
+          <Paper sx={{ width: "32.5vw", height: "29.5vh" }} elevation={3}>
+            <h2 style={{ paddingTop: "2%", paddingLeft: "15px" }}>
+              Total Reviews
+            </h2>
+            <ReactEcharts option={option2} style={{ height: "25vh" }} />
+          </Paper>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }

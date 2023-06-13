@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   text-decoration: none;
+  box-sizing: border-box;
 }
 main{
   width: 100%;
@@ -12,5 +13,6 @@ main{
 }
 body{
   
-  background-color: rgba(234, 230, 234, 0.777);
+  background-color: rgba(240, 237, 237);
 }
+/* rgb(240, 237, 237) */

@@ -1,14 +1,15 @@
 .container{
     display:flex;
     transition: all 0.5s;
+    padding-top: -20px;
 }
 .sidebar{
     box-shadow: 0 1px 6px 0 rgb(201, 199, 199);
-    background: white;
-    color: rgba(6, 6, 6, 0.922);
+    background: rgb(35, 33, 33);
+    color: rgba(194, 193, 193, 0.837);
     height: 100vh;
     transition: all 0.5s;
-    border-radius: 0 25px 25px 0;
+    /* border-radius: 0 25px 25px 0; */
 }
 .sidebar__child{
     margin-top: 30px;
@@ -31,28 +32,36 @@
 }
 .link{
     display: flex;
-    color:rgba(47, 45, 45, 0.837);
-    padding-left: 15px;
-    margin-top: 15px;
-    gap: 15px;
+    align-items: center;
+    color:rgba(194, 193, 193, 0.837);
+    padding: 0 0.7rem;
+    margin: 0.5rem 0.5rem;
     transition: all 0.5s;
 }
 .link:hover{
-    background: #030553;
+    background: #464646;
     border-radius: 10px;
     align-items: center;
     color: white;
     transition: all 0.5s;
 }
 .active{
-    background: #030553;
+    background: #464646;
     border-radius: 10px;
     color:white;
     transition: all 0.5s;
 }
+
+.icon {
+    position: relative;
+    top: 2px;
+}
+
 .icon,  .link_text{
     font-size: 20px;
-    margin-top: 10px;
-     
-   
+    /* margin-top: 10px; */
+    padding: 0.8rem 0;
+}
+.link_text {
+    padding-left: 1.2rem;
 }

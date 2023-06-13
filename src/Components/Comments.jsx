@@ -11,7 +11,7 @@ const rows = [
     rating: 4,
     date: "2022-01-21",
     comment:
-      "The staff was great. The receptionists were very helpful and answered all our questions. The room was clean and bright, and the room service was always on time. Will be coming back! Thank you so much.",
+      "I absolutely love shopping on this website! The products are high-quality, the prices are great, and the customer service is outstanding. Highly recommended!",
   },
   {
     name: "John Doe",
@@ -20,7 +20,7 @@ const rows = [
     rating: 3.5,
     date: "2022-03-11",
     comment:
-      "The hotel was decent for the price. The staff was friendly and accommodating. However, the room was a bit small and outdated. Overall, it was a satisfactory stay.",
+      "The shipping was incredibly fast, and the packaging was excellent. The product I ordered was exactly as described, and I'm very satisfied with my purchase.",
   },
   {
     name: "Jane Smith",
@@ -29,7 +29,7 @@ const rows = [
     rating: 5,
     date: "2022-01-01",
     comment:
-      "This hotel exceeded my expectations. The room was spacious and modern, with great amenities. The staff was friendly and went above and beyond to make my stay comfortable. Highly recommend!",
+      "I had a small issue with my order, but the customer support team was quick to respond and resolve the problem. They were friendly and helpful throughout the process",
   },
   {
     name: "Towdur Rai",
@@ -38,16 +38,16 @@ const rows = [
     rating: 4,
     date: "12022-02-15",
     comment:
-      "The staff was great. The receptionists were very helpful and answered all our questions. The room was clean and bright, and the room service was always on time. Will be coming back! Thank you so much.",
+      "The return process was hassle-free. I needed to exchange a product, and the team was responsive and efficient in handling my request. Great customer service!",
   },
   {
     name: "John Doe",
     spending: "$100",
     reviews: 7,
-    rating: 3.5,
+    rating: 4.5,
     date: "2022-12-01",
     comment:
-      "The hotel was decent for the price. The staff was friendly and accommodating. However, the room was a bit small and outdated. Overall, it was a satisfactory stay.",
+      "The checkout process is seamless, and I appreciate the various payment options available. It's convenient and secure, which gives me peace of mind while making a purchase.",
   },
   {
     name: "Jane Smith",
@@ -56,7 +56,7 @@ const rows = [
     rating: 5,
     date: "2022-03-11",
     comment:
-      "This hotel exceeded my expectations. The room was spacious and modern, with great amenities. The staff was friendly and went above and beyond to make my stay comfortable. Highly recommend!",
+      "The shipping was incredibly fast, and the packaging was excellent. The product I ordered was exactly as described, and I'm very satisfied with my purchase.",
   },
   {
     name: "Towdur Rahman",
@@ -65,7 +65,7 @@ const rows = [
     rating: 4,
     date: "2022-09-21",
     comment:
-      "The staff was great. The receptionists were very helpful and answered all our questions. The room was clean and bright, and the room service was always on time. Will be coming back! Thank you so much.",
+      "The delivery was prompt, and the tracking system kept me informed about the shipping progress. I received my order in perfect condition.",
   },
   {
     name: "John Doe",
@@ -74,7 +74,7 @@ const rows = [
     rating: 3.5,
     date: "2022-11-21",
     comment:
-      "The hotel was decent for the price. The staff was friendly and accommodating. However, the room was a bit small and outdated. Overall, it was a satisfactory stay.",
+      "The product quality exceeded my expectations. I've ordered multiple items from this website, and they have all been of excellent quality and durability.",
   },
   {
     name: "Monica goel",
@@ -83,15 +83,15 @@ const rows = [
     rating: 5,
     date: "2022-04-11",
     comment:
-      "This hotel exceeded my expectations. The room was spacious and modern, with great amenities. The staff was friendly and went above and beyond to make my stay comfortable. Highly recommend!",
+      "I absolutely love shopping on this website! The products are high-quality, the prices are great, and the customer service is outstanding. Highly recommended!",
   },
 ];
 
 function Comments({ startDate, endDate }) {
-      const filteredRows = rows.filter((row) => {
-        const rowDate = new Date(row.date);
-        return rowDate >= new Date(startDate) && rowDate <= new Date(endDate);
-      });
+  const filteredRows = rows.filter((row) => {
+    const rowDate = new Date(row.date);
+    return rowDate >= new Date(startDate) && rowDate <= new Date(endDate);
+  });
 
   return (
     <>
@@ -110,15 +110,19 @@ function Comments({ startDate, endDate }) {
                 width: 68,
                 height: 68,
                 color: "black",
-                backgroundColor: "pink",
+                backgroundColor: "lightblue",
               }}
               variant="rounded"
             />
           </Grid>
           <Grid sx={{ width: "350px", gap: "5px" }}>
             <h2>{row.name}</h2>
-            <p style={{ paddingTop: "8px" }}>Total spend: {row.spending}</p>
-            <p style={{ paddingTop: "3px" }}>Total Reviews: {row.reviews}</p>
+            <p style={{ paddingTop: "8px", color: "gray" }}>
+              Total spend: {row.spending}
+            </p>
+            <p style={{ paddingTop: "3px", color: "gray" }}>
+              Total Reviews: {row.reviews}
+            </p>
           </Grid>
           <Grid sx={{ width: "33vw", height: "15vh", paddingLeft: "10px" }}>
             <Grid

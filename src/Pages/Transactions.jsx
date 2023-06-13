@@ -1,175 +1,144 @@
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import ReactEcharts from 'echarts-for-react';
-
+import * as React from "react";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
+import ReactEcharts from "echarts-for-react";
+import { Grid } from "@mui/material";
 const op = {
-  // title: {
-  //   text: 'Stacked Line'
-  // },
   tooltip: {
-    trigger: 'axis'
+    trigger: "axis",
   },
   legend: {
-    data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+    data: ["Amount"],
   },
   grid: {
-    left: '3%',
-    right: '4%',
-    bottom: '3%',
-    containLabel: true
+    left: "3%",
+    right: "4%",
+    bottom: "3%",
+    containLabel: true,
   },
   toolbox: {
     feature: {
-      saveAsImage: {}
-    }
+      saveAsImage: {},
+    },
   },
   xAxis: {
-    type: 'category',
+    type: "category",
     boundaryGap: false,
-    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
   },
   yAxis: {
-    type: 'value'
+    type: "value",
   },
   series: [
     {
-      name: 'Email',
-      type: 'line',
-      stack: 'Total',
-      data: [120, 132, 101, 134, 90, 230, 210]
+      name: "Amount",
+      type: "line",
+      stack: "Total",
+      data: [10050, 11932, 10501, 15500, 11290, 13330, 12320],
     },
-    {
-      name: 'Union Ads',
-      type: 'line',
-      stack: 'Total',
-      data: [220, 182, 191, 234, 290, 330, 310]
-    },
-    {
-      name: 'Video Ads',
-      type: 'line',
-      stack: 'Total',
-      data: [150, 232, 201, 154, 190, 330, 410]
-    },
-    {
-      name: 'Direct',
-      type: 'line',
-      stack: 'Total',
-      data: [320, 332, 301, 334, 390, 330, 320]
-    },
-    {
-      name: 'Search Engine',
-      type: 'line',
-      stack: 'Total',
-      data: [820, 932, 901, 934, 1290, 1330, 1320]
-    }
-  ]
+  ],
 };
 
-
 const columns = [
-   {
-      id: 'code',
-      label: 'TrannsactionId',
-      minWidth: 170,
-    },
-  
-    {
-      id: 'date',
-      label: 'Date',
-       minWidth: 170,
-    },
-    {
-      id: 'amount',
-      label: 'Amount(Rs)',
-      minWidth: 170,
-      format: (value) => value.toLocaleString('en-US'),
-    },
-    {
-      id: 'status',
-      label: 'Status',
-      minWidth: 170,
-    },
-  ];
-  
+  {
+    id: "code",
+    label: "TrannsactionId",
+    minWidth: 170,
+  },
 
+  {
+    id: "date",
+    label: "Date",
+    minWidth: 170,
+  },
+  {
+    id: "amount",
+    label: "Amount(Rs)",
+    minWidth: 170,
+    format: (value) => value.toLocaleString("en-US"),
+  },
+  {
+    id: "status",
+    label: "Status",
+    minWidth: 170,
+  },
+];
 
-      
-function createData(TrannsactionId,Date,Amount,Status) {
-  return { TrannsactionId,Date,Amount,Status };
+function createData(TrannsactionId, Date, Amount, Status) {
+  return { TrannsactionId, Date, Amount, Status };
 }
 
 const rows = [
-  createData('SBI10388', '3-1-2023', 4500, 'Successful'),
-  createData('SBI10389', '1-1-2023', 5000, 'Successful'),
-  createData('SBI10390', '12-12-2022', 6000, 'Pending'),
-  createData('SBI10391', '14-12-2022', 7000, 'Successful'),
-  createData('SBI10392', '19-12-2022', 8000, 'Successful'),
-  createData('SBI10393', '20-11-2022', 9000, 'Failed'),
-  createData('SBI10394', '21-11-2022', 10000, 'Successful'),
-  createData('SBI10395', '24-11-2022', 11000, 'Successful'),
-  createData('SBI10396', '28-11-2022', 12000, 'Successful'),
-  createData('SBI10397', '29-11-2022', 13000, 'Successful'),
-  createData('SBI10398', '29-11-2022', 14000, 'Successful'),
-  createData('SBI10399', '1-10-2022', 15000, 'Successful'),
-  createData('SBI10400', '1-10-2022', 16000, 'Successful'),
-  createData('SBI10401', '1-10-2022', 17000, 'Successful'),
-  createData('SBI10402', '2-10-2022', 18000, 'Successful'),
-  createData('SBI10403', '2-10-2022', 19000, 'Successful'),
-  createData('SBI10404', '4-10-2022', 20000, 'Successful'),
-  createData('SBI10405', '10-9-2022', 21000, 'Successful'),
-  createData('SBI10406', '14-9-2022', 22000, 'Successful'),
-  createData('SBI10407', '20-8-2022', 23000, 'Successful'),
+  createData("SBI10388", "January 4,2023", 450, "Successful"),
+  createData("SBI10389", "January 1,2023", 1000, "Successful"),
+  createData("SBI10390", "February 3,2022", 600, "Pending"),
+  createData("SBI10391", "February 5,2022", 700, "Successful"),
+  createData("SBI10392", "February 5,2022", 900, "Successful"),
+  createData("SBI10393", "February 6,2022", 900, "Failed"),
+  createData("SBI10394", "February 6,2022", 1000, "Successful"),
+  createData("SBI10395", "February 2,2022", 200, "Successful"),
+  createData("SBI10396", "February 8,2022", 2000, "Successful"),
+  createData("SBI10397", "March 1,2022", 1000, "Successful"),
+  createData("SBI10398", "March 12,2022", 1000, "Successful"),
+  createData("SBI10399", "March 11,2022", 1500, "Successful"),
+  createData("SBI10400", "March 13,2022", 600, "Successful"),
+  createData("SBI10401", "March 16,2022", 1000, "Successful"),
+  createData("SBI10402", "March 17,2022", 800, "Successful"),
+  createData("SBI10403", "March 21,2022", 900, "Successful"),
+  createData("SBI10404", "March 22,2022", 1000, "Successful"),
+  createData("SBI10405", "March 25,2022", 1000, "Successful"),
+  createData("SBI10406", "March 28,2022", 2000, "Successful"),
+  createData("SBI10407", "March 30,2022", 2000, "Successful"),
 ];
 
 export default function Reviews() {
   const option = {
     tooltip: {
-      trigger: 'item'
+      trigger: "item",
     },
     legend: {
-      top: '5%',
-      left: 'center'
+      orient: "vertical",
+      left: "left",
+      top: "middle",
     },
     series: [
       {
-        name: 'Access From',
-        type: 'pie',
-        radius: ['40%', '70%'],
+        name: "Access From",
+        type: "pie",
+        radius: ["40%", "70%"],
         avoidLabelOverlap: false,
         itemStyle: {
           borderRadius: 10,
-          borderColor: '#fff',
-          borderWidth: 2
+          borderColor: "#fff",
+          borderWidth: 2,
         },
         label: {
           show: false,
-          position: 'center'
+          position: "center",
         },
         emphasis: {
           label: {
             show: true,
             fontSize: 40,
-            fontWeight: 'bold'
-          }
+            fontWeight: "bold",
+          },
         },
         labelLine: {
-          show: false
+          show: false,
         },
         data: [
-          { value: 1048, name: 'Successful' },
-          { value: 735, name: 'Unsuccesfull'},
-          { value: 580, name: 'Pending' },
-        
-        ]
-      }
-    ]
+          { value: 1048, name: "Successful" },
+          { value: 735, name: "Failed" },
+          { value: 580, name: "Pending" },
+        ],
+      },
+    ],
   };
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -185,26 +154,42 @@ export default function Reviews() {
 
   return (
     <div>
-      <h1 style={{fontFamily:'cursiv'}}>Status Pie Charts</h1>
-       <ReactEcharts option={option} 
-        style={{
-          position:'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          width:'500px',
-          marginLeft:'200px',
-          paddingBottom:'30%',
-         }}
-        />
-        {/* <h1 style={{fontFamily:'cursiv',marginLeft:'50%',marginTop:'-20%'}} >Status Line Charts</h1>   */}
-       <ReactEcharts
-        option={op} 
-        style={{ height: '300px',width: '550px',marginLeft:'550px'} }
-      /> 
-      
-      <h1 style={{fontFamily:'cursiv',marginTop:'5%',marginLeft:'5%'}}>Transaction History</h1> 
-      <Paper sx={{ width: '90%',marginLeft:'5%',marginTop:'15px'}}>
+      <Grid
+        container
+        span={2}
+        gap={5}
+        sx={{ marginTop: "1rem", marginLeft: "2rem" }}
+      >
+        <Paper sx={{ width: "38vw", height: "42vh" }}>
+          <h2 style={{ paddingLeft: "2rem", paddingTop: "1rem" }}>Status</h2>
+          <ReactEcharts option={option} style={{}} />
+        </Paper>
+
+        <Paper sx={{ width: "42vw", height: "42vh", marginLeft: "-.5rem" }}>
+          <h2 style={{ paddingLeft: "2rem", paddingTop: "1rem" }}>Amount</h2>
+          <ReactEcharts
+            option={op}
+            style={{ height: "280px", width: "550px", paddingLeft: "2rem" }}
+          />
+        </Paper>
+      </Grid>
+      <Paper
+        sx={{
+          width: "95%",
+          marginLeft: "2rem",
+          marginTop: "2rem",
+          height: "51vh",
+        }}
+      >
+        <h2
+          style={{
+            paddingLeft: "1rem",
+            paddingTop: "1rem",
+            paddingBottom: "1rem",
+          }}
+        >
+          Transaction History
+        </h2>
         <TableContainer sx={{ maxHeight: 340 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
@@ -214,7 +199,7 @@ export default function Reviews() {
                     key={column.id}
                     align={column.align}
                     style={{ minWidth: column.minWidth }}
-                    sx={{fontWeight:'bold'}}
+                    sx={{ fontWeight: "bold", color: "gray" }}
                   >
                     {column.label}
                   </TableCell>
@@ -226,7 +211,12 @@ export default function Reviews() {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={row.TrannsactionId}>
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={row.TrannsactionId}
+                    >
                       <TableCell align="left">{row.TrannsactionId}</TableCell>
                       <TableCell>{row.Date}</TableCell>
                       <TableCell>{row.Amount}</TableCell>
@@ -247,6 +237,6 @@ export default function Reviews() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-     </div> 
+    </div>
   );
 }
