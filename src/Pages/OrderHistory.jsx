@@ -8,9 +8,14 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TablePagination from "@mui/material/TablePagination";
 import DateRangePicker from "../Components/DateRangePicker";
-import { Grid } from "@mui/material";
+import { Box} from "@mui/material";
 import Orders from "../Components/Orders";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import dayjs from "dayjs";
+import Sidebar from "../SideBar/Sidebar";
+import CancelIcon from "@mui/icons-material/Cancel";
+import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const columns = [
   {
@@ -91,6 +96,24 @@ const rows = [
   createData("Sangeeta", 20, "February 6,2022", 23000, "Delivered"),
 ];
 export default function OrderHistory() {
+
+
+  const icon1 = <LocalShippingIcon style={{fontSize:'2.2rem'}}/>;
+  const heading = "Total Delivery";
+  const totalOrder = 200;
+
+  const icon2 = <AccessTimeFilledIcon style={{fontSize:'2.2rem'}} />;
+  const heading2 = "Total Pending";
+  const totalpending = 40;
+
+  const icon3 = <CancelIcon style={{fontSize:'2.2rem'}}/>;
+  const heading3 = "Total Concellation";
+  const totalCancellation = 10;
+
+  const icon4 = <CircularProgress style={{fontSize:'2.2rem',color:'white'}} />;
+  const heading4 = "Total Process";
+  const totalProcessing = 10;
+
   const [range, setRange] = React.useState([
     dayjs("2022-01-17"),
     dayjs("2023-04-21"),
@@ -115,99 +138,108 @@ export default function OrderHistory() {
   };
 
   return (
-    <div>
-      <Paper
-        elevation={1}
-        sx={{
-          width: "79vw",
-          height: "10vh",
-          marginLeft: "3rem",
-          marginTop: "1rem",
-        }}
-      >
-        <Grid
-          container
-          span={2}
+   
+      <Box sx={{ margin: "1rem" }}>
+        
+        <Box
           sx={{
-            flexWrap: "nowrap",
+            display: "flex",
+            justifyContent: "space-evenly",
+            marginTop: "2rem",
           }}
         >
-          <h2
-            style={{
-              fontSize: "30px",
-              width: "45vw",
-              marginLeft: "1rem",
-              marginTop: "1rem",
+          <Paper sx={{ width: "80vw", height: "5rem" }}>
+            <Box sx={{ display: "flex" }}>
+              <h2 style={{ flexGrow: 1,margin:'1.2rem 0 0 1rem' }}>Order History</h2>
+              <DateRangePicker range={range} setRange={setRange} />
+            </Box>
+          </Paper>
+        </Box>
+
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            marginTop: "2rem",
+            gap: 1,
+          }}
+        >
+          <Orders icon={icon1} heading={heading} totalOrder={totalOrder}/>
+          <Orders icon={icon2} heading={heading2} totalOrder={totalpending} />
+          <Orders
+            icon={icon3}
+            heading={heading3}
+            totalOrder={totalCancellation}
+           
+          />
+          <Orders
+            icon={icon4}
+            heading={heading4}
+            totalOrder={totalProcessing}
+           
+          />
+        </Box>
+        <Box sx={{display:'flex',justifyContent:'space-evenly',margin:'2rem'}}>
+          <Paper
+            elevation={1}
+            sx={{
+              width: "80vw",
+              height: "60vh",
             }}
           >
-            Order History
-          </h2>
-          <Grid sx={{ marginTop: "9px", marginLeft: "3rem" }}>
-            <DateRangePicker range={range} setRange={setRange} />
-          </Grid>
-        </Grid>
-      </Paper>
-      <Orders />
-
-      <Paper
-        elevation={1}
-        sx={{
-          width: "80vw",
-          height: "60vh",
-          overflow: "hidden",
-          marginLeft: "3rem",
-          marginTop: "2rem",
-        }}
-      >
-        <h2 style={{ paddingLeft: "1rem", marginTop: "1rem" }}>All Oders</h2>
-        <TableContainer sx={{ height: "48vh" }}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                {columns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
-                    sx={{ fontWeight: "bold" }}
-                  >
-                    {column.label}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {filteredRows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.OrderBy}
-                    >
-                      <TableCell align="left">{row.OrderBy}</TableCell>
-                      <TableCell align="left">{row.OrderId}</TableCell>
-                      <TableCell>{row.OrderDate}</TableCell>
-                      <TableCell>{row.Amount}</TableCell>
-                      <TableCell>{row.Status}</TableCell>
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[25, 100]}
-          component="div"
-          count={filteredRows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-    </div>
+            <h2 style={{ paddingLeft: "1rem", marginTop: "1rem" }}>
+              All Oders
+            </h2>
+            <TableContainer sx={{ height: "48vh" }}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    {columns.map((column) => (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        style={{ minWidth: column.minWidth }}
+                        sx={{ fontWeight: "bold" }}
+                      >
+                        {column.label}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {filteredRows
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => {
+                      return (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={row.OrderBy}
+                        >
+                          <TableCell align="left">{row.OrderBy}</TableCell>
+                          <TableCell align="left">{row.OrderId}</TableCell>
+                          <TableCell>{row.OrderDate}</TableCell>
+                          <TableCell>{row.Amount}</TableCell>
+                          <TableCell>{row.Status}</TableCell>
+                        </TableRow>
+                      );
+                    })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[25, 100]}
+              component="div"
+              count={filteredRows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Paper>
+        </Box>
+      </Box>
+    
   );
 }
