@@ -7,7 +7,6 @@ import Profile from "../Components/Profile";
 import Data1 from "../Components/OrderData";
 import SalesData from "../Components/SalesData";
 import UsersData from "../Components/UsersData";
-import Sidebar from "../SideBar/Sidebar";
 
 const option = {
   tooltip: {
