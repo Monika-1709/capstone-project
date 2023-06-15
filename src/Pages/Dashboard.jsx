@@ -7,6 +7,7 @@ import Profile from "../Components/Profile";
 import Data1 from "../Components/OrderData";
 import SalesData from "../Components/SalesData";
 import UsersData from "../Components/UsersData";
+import Sidebar from "../SideBar/Sidebar";
 
 const option = {
   tooltip: {
@@ -41,6 +42,7 @@ const option = {
       data: [
         { value: 1048, name: "Delivered" },
         { value: 735, name: "Dispatch" },
+        { value: 180, name: "Processing" },
         { value: 580, name: "Pending" },
         { value: 484, name: "Cancelled" },
       ],
@@ -61,11 +63,11 @@ const op = {
     bottom: "3%",
     containLabel: true,
   },
-  toolGrid: {
-    feature: {
-      saveAsImage: {},
-    },
-  },
+  // toolGrid: {
+  //   feature: {
+  //     saveAsImage: {},
+  //   },
+  // },
   xAxis: {
     type: "category",
     boundaryGap: false,
@@ -126,103 +128,104 @@ export default function Dashboard() {
       <Paper
         elevation={0}
         variant="outlined"
-        sx={{ height: "9vh", width: "100%" }}
+        sx={{ height: "4.6rem", width: "100%" }}
       >
         <Grid container spacing={2} flexWrap="nowrap">
           <p
             style={{
               marginLeft: "3rem",
+              fontFamily: "sans-serif",
               paddingTop: "35px",
-              fontWeight: "bold",
-              fontSize: "27px",
-              width: "67vw",
+              flexGrow: 1,
+              fontSize: "22px",
             }}
           >
-            Welcome to Dashboard
+            Welcome to Dashboard! <span>&#128588;</span>
           </p>
 
           <Profile />
-          <Grid
-            sx={{ marginTop: "2.5rem", marginLeft: "8px", fontWeight: "bold" }}
-          >
-            <p>Sajib Suprio</p>
-          </Grid>
         </Grid>
       </Paper>
 
-      <Grid
-        container
-        spacing={3}
-        sx={{ paddingLeft: "50px", gap: "26px", paddingTop: "48px" }}
-        flexWrap="nowrap"
-      >
-        <Paper
-          elevation={3}
-          sx={{ width: "26.5vw", height: "16.5vh", borderRadius: "5px" }}
+      <Box sx={{ margin: "1rem" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            gap: "1rem",
+            marginTop: "1.5rem",
+          }}
         >
-          <Data1 />
-        </Paper>
+          <Paper
+            elevation={3}
+            sx={{ width: "26vw", height: "16.5vh", borderRadius: "5px" }}
+          >
+            <Data1 />
+          </Paper>
 
-        <Paper
-          elevation={3}
-          sx={{ width: "26.5vw", height: "16.5vh", borderRadius: "5px" }}
+          <Paper
+            elevation={3}
+            sx={{ width: "26vw", height: "16.5vh", borderRadius: "5px" }}
+          >
+            <UsersData />
+          </Paper>
+          <Paper
+            elevation={3}
+            sx={{ width: "26vw", height: "16.5vh", borderRadius: "5px" }}
+          >
+            <SalesData />
+          </Paper>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            gap: "1rem",
+            marginTop: "1.5rem",
+          }}
         >
-          <UsersData />
-        </Paper>
-
-        <Paper
-          elevation={3}
-          sx={{ width: "26.5vw", height: "16.5vh", borderRadius: "5px" }}
-        >
-          <SalesData />
-        </Paper>
-      </Grid>
-
-      <Grid container spacing={2} flexWrap="nowrap">
-        <Grid sx={{ paddingTop: "37px", marginLeft: "40px" }}>
-          <Paper sx={{ width: "48.5vw", height: "34vh" }} elevation={3}>
+          <Paper sx={{ width: "47.5vw", height: "34vh" }} elevation={3}>
             <h2 style={{ paddingTop: "2%", paddingLeft: "20px" }}>
               Recent Visitors
             </h2>
             <ReactEcharts
               option={op}
-              style={{ height: "30vh", width: "45vw", marginTop: "-15px" }}
+              style={{ height: "27vh", width: "45vw" }}
             />
           </Paper>
-        </Grid>
-
-        <Grid sx={{ marginLeft: "28px", paddingTop: "37px" }}>
           <Paper sx={{ width: "32.5vw", height: "34vh" }} elevation={3}>
-            <h2 style={{ paddingTop: "3%", paddingLeft: "15px" }}>
-              {" "}
+            <h2 style={{ paddingTop: "1rem", paddingLeft: "1rem" }}>
               Order Status
             </h2>
             <ReactEcharts
               option={option}
-              style={{ marginTop: "-20px", marginLeft: "3rem" }}
+              style={{ marginTop: "-2rem", marginLeft: "3rem" }}
             />
           </Paper>
-        </Grid>
-      </Grid>
-
-      <Grid container spacing={2} flexWrap="nowrap">
-        <Grid sx={{ paddingTop: "2.5rem", paddingLeft: "40px" }}>
-          <Paper sx={{ width: "48.5vw", height: "29.5vh" }} elevation={3}>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            gap: "1rem",
+            marginTop: "1.5rem",
+          }}
+        >
+          <Paper sx={{ width: "47.5vw", height: "29.5vh" }} elevation={3}>
             <h2 style={{ paddingTop: "2%", paddingLeft: "15px" }}>
               Recent Orders
             </h2>
             <RecentOrders />
           </Paper>
-        </Grid>
-        <Grid sx={{ paddingTop: "2.5rem", paddingLeft: "28px" }}>
+
           <Paper sx={{ width: "32.5vw", height: "29.5vh" }} elevation={3}>
             <h2 style={{ paddingTop: "2%", paddingLeft: "15px" }}>
               Total Reviews
             </h2>
             <ReactEcharts option={option2} style={{ height: "25vh" }} />
           </Paper>
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
     </Box>
   );
 }
