@@ -1,8 +1,9 @@
 import { Button, TableCell, TableRow } from "@mui/material";
 import { useState } from "react";
 import Popup from "./Popup";
+import { Phone } from "@mui/icons-material";
 
-export default function CustomTableRow({ name, date, stime, etime, chat }) {
+export default function CustomTableRow({ name, phone,date, stime, etime, chat }) {
   const [popup, setPopup] = useState(false);
 
   function handleOpen() {
@@ -16,6 +17,7 @@ export default function CustomTableRow({ name, date, stime, etime, chat }) {
   return (
     <TableRow hover role="checkbox" tabIndex={-1} key={name}>
       <TableCell align="left">{name}</TableCell>
+      <TableCell>{phone}</TableCell>
       <TableCell>{date}</TableCell>
       <TableCell>{stime}</TableCell>
       <TableCell>{etime}</TableCell>
@@ -27,8 +29,7 @@ export default function CustomTableRow({ name, date, stime, etime, chat }) {
           openPopup={popup}
           setOpenPopup={setPopup}
           onClick={handleClose}
-          children={chat}
-        />
+        >{chat}</Popup>
       </TableCell>
     </TableRow>
   );

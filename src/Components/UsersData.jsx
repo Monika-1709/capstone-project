@@ -2,10 +2,22 @@ import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import { Grid } from "@mui/material";
 import React from "react";
 import Paper from "@mui/material/Paper";
-
+import axios from "axios";
+import { useState } from "react";
 import Divider from "@mui/material/Divider";
 
+const baseURL="http://localhost:8080/count/users";
+
+
 function UsersData() {
+  const [post, setPost]=useState(null);
+
+  React.useEffect(() => {
+    axios.get(baseURL).then((response) => {
+      setPost(response.data);
+    });
+  }, []);
+
   return (
     <div>
       <Grid
@@ -44,7 +56,7 @@ function UsersData() {
           }}
         >
           <p style={{ color: "gray" }}>Total Users</p>
-          <h2 style={{ marginTop: "5px" }}>120k</h2>
+          <h2 style={{ marginTop: "5px" }}>{post}</h2>
         </Grid>
       </Grid>
       <Grid>

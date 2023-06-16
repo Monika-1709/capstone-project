@@ -3,7 +3,7 @@ import React from "react";
 import Avatar from "@mui/material/Avatar";
 
 function Orders(props) {
-  const { icon, heading, totalOrder } = props;
+  const { icon, heading, totalOrder ,backgroundColor} = props;
   
 
   return (
@@ -15,7 +15,7 @@ function Orders(props) {
               width: 65,
               height: 65,
               margin: "1.5rem 0 0 1rem",
-              backgroundColor: "rgb(35, 33, 33)",
+              backgroundColor: backgroundColor
             }}
           >
             {icon}

@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Avatar, Box, Button, Popover, Typography } from "@mui/material";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Link } from "react-router-dom";
+
 
 function ProfileAvatar() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -20,8 +23,7 @@ function ProfileAvatar() {
       <Button onClick={handleClick}>
         <Avatar
           style={{
-            marginLeft: "3.5rem",
-            marginTop: "1.4rem",
+            marginLeft: "1rem",
             width: 50,
             height: 50,
             backgroundColor: "#4682b4",
@@ -29,6 +31,12 @@ function ProfileAvatar() {
         >
           S
         </Avatar>
+
+        <p style={{  marginLeft: "8px", fontWeight: "bold",color:'black' }}>
+          Sajib Suprio
+        </p>
+        <ExpandMoreIcon style={{color:'black'}}/>
+
       </Button>
       <Popover
         id={popoverId}
@@ -37,7 +45,7 @@ function ProfileAvatar() {
         onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "left",
+          horizontal: "right",
         }}
         transformOrigin={{
           vertical: "top",
@@ -47,7 +55,7 @@ function ProfileAvatar() {
         <Box
           style={{
             padding: "1rem",
-            width:'15vw'
+            width: "15vw",
           }}
         >
           <Avatar
@@ -63,6 +71,7 @@ function ProfileAvatar() {
 
           <Typography variant="body1">Name: Sajib Suprio</Typography>
           <Typography variant="body1">Email: sajib12@gmail.com</Typography>
+          <Link href='#'>Sign Out</Link>
         </Box>
       </Popover>
     </>

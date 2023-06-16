@@ -8,19 +8,27 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TablePagination from "@mui/material/TablePagination";
 import DateRangePicker from "../Components/DateRangePicker";
-import { Box} from "@mui/material";
+import { Box } from "@mui/material";
 import Orders from "../Components/Orders";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import dayjs from "dayjs";
 import Sidebar from "../SideBar/Sidebar";
 import CancelIcon from "@mui/icons-material/Cancel";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from "@mui/material/CircularProgress";
+import axios from "axios";
+
+
+const baseURL1 = "http://localhost:8082/count/delivered";
+const baseURL2 = "http://localhost:8082/count/processing";
+const baseURL3 = "http://localhost:8082/count/pending";
+const baseURL4 = "http://localhost:8082/count/canceled";
+const baseURL5 = "http://localhost:8082/order";
 
 const columns = [
   {
     id: "name",
-    label: "Order by",
+    label: "User ID",
     minWidth: 170,
   },
   {
@@ -49,81 +57,79 @@ const columns = [
   },
 ];
 
-function createData(OrderBy, OrderId, OrderDate, Amount, Status) {
-  return { OrderBy, OrderId, OrderDate, Amount, Status };
-}
 
-const rows = [
-  createData("Ram", 1, "January 1,2023", 4500, "Delivered"),
-  createData("Shyam", 2, "January 12,2023", 5000, "Delivered"),
-  createData("Gita", 3, "January 10,2023", 6000, "Pending"),
-  createData("Hari", 4, "January 16,2023", 7000, "Delivered"),
-  createData("Sita", 5, "January 19,2023", 8000, "Delivered"),
-  createData("Ravi", 6, "January 14,2023", 9000, "Cancelled"),
-  createData("Priya", 7, "January 16,2023", 10000, "Delivered"),
-  createData("Amit", 8, "January 17,2023", 11000, "Delivered"),
-  createData("Mohan", 9, "January 7,2023", 12000, "Delivered"),
-  createData("Krishna", 10, "January 9,2023", 13000, "Delivered"),
-  createData("Radha", 11, "January 6,2023", 14000, "Delivered"),
-  createData("Vikas", 12, "January 1,2023", 15000, "Delivered"),
-  createData("Deepak", 13, "February 8,2022", 16000, "Delivered"),
-  createData("Kavita", 14, "February 6,2022", 17000, "Delivered"),
-  createData("Aarti", 15, "February 9,2022", 18000, "Delivered"),
-  createData("Neha", 16, "February 16,2022", 19000, "Delivered"),
-  createData("Rohan", 17, "March 11,2022", 20000, "Delivered"),
-  createData("Raj", 18, "March 10,2022", 21000, "Delivered"),
-  createData("Aman", 19, "March 15,2022", 22000, "Delivered"),
-  createData("Sangeeta", 20, "March 19,2022", 23000, "Delivered"),
-  createData("Ram", 1, "March 21,2022", 4500, "Delivered"),
-  createData("Shyam", 2, "March 10,2022", 5000, "Delivered"),
-  createData("Gita", 3, "March 21,2022", 6000, "Pending"),
-  createData("Hari", 4, "2March 22,2022", 7000, "Delivered"),
-  createData("Sita", 5, "March 28,2022", 8000, "Delivered"),
-  createData("Ravi", 6, "March 24,2022", 9000, "Cancelled"),
-  createData("Priya", 7, "March 31,2022", 10000, "Delivered"),
-  createData("Amit", 8, "March 28,2022", 11000, "Delivered"),
-  createData("Mohan", 9, "February 6,2022", 12000, "Delivered"),
-  createData("Krishna", 10, "February 8,2022", 13000, "Delivered"),
-  createData("Radha", 11, "February 5,2022", 14000, "Delivered"),
-  createData("Vikas", 12, "2February 7,2022", 15000, "Delivered"),
-  createData("Deepak", 13, "February 11,2022", 16000, "Delivered"),
-  createData("Kavita", 14, "February 13,2022", 17000, "Delivered"),
-  createData("Aarti", 15, "February 12,2022", 18000, "Delivered"),
-  createData("Neha", 16, "February 18,2022", 19000, "Delivered"),
-  createData("Rohan", 17, "February 14,2022", 20000, "Delivered"),
-  createData("Raj", 18, "February 23,2022", 21000, "Delivered"),
-  createData("Aman", 19, "February 22,2022", 22000, "Delivered"),
-  createData("Sangeeta", 20, "February 6,2022", 23000, "Delivered"),
-];
 export default function OrderHistory() {
 
+    const [post, setPost] = React.useState([]);
+    React.useEffect(() => {
+      axios.get(baseURL1).then((response) => {
+        console.log(response.data);
+        setPost(response.data);
+      });
+    }, []);
 
-  const icon1 = <LocalShippingIcon style={{fontSize:'2.2rem'}}/>;
+    const [totalPending, settotalPending] = React.useState([]);
+    React.useEffect(() => {
+      axios.get(baseURL3).then((response) => {
+        console.log(response.data);
+        settotalPending(response.data);
+      });
+    }, []);
+
+    const [totalCancellation, settotalCancellation] = React.useState([]);
+    React.useEffect(() => {
+      axios.get(baseURL4).then((response) => {
+        console.log(response.data);
+        settotalCancellation(response.data);
+      });
+    }, []);
+
+    const [totalProcessing, settotalProcessing] = React.useState([]);
+    React.useEffect(() => {
+      axios.get(baseURL2).then((response) => {
+        console.log(response.data);
+        settotalProcessing(response.data);
+      });
+    }, []);
+
+    const [rows ,setrows] = React.useState([]);
+    React.useEffect(() => {
+      axios.get(baseURL5).then((response) => {
+        console.log(response.data);
+        setrows(response.data);
+      });
+    }, []);
+
+  const icon1 = <LocalShippingIcon style={{ fontSize: "2.2rem" }} />;
   const heading = "Total Delivery";
-  const totalOrder = 200;
-
-  const icon2 = <AccessTimeFilledIcon style={{fontSize:'2.2rem'}} />;
+  const backgroundColor1= "#4169e1";
+  
+  const icon2 = <AccessTimeFilledIcon style={{ fontSize: "2.2rem" }} />;
   const heading2 = "Total Pending";
-  const totalpending = 40;
+  const backgroundColor2= "#228b22";
+  
 
-  const icon3 = <CancelIcon style={{fontSize:'2.2rem'}}/>;
+  const icon3 = <CancelIcon style={{ fontSize: "2.2rem" }} />;
   const heading3 = "Total Concellation";
-  const totalCancellation = 10;
-
-  const icon4 = <CircularProgress style={{fontSize:'2.2rem',color:'white'}} />;
-  const heading4 = "Total Process";
-  const totalProcessing = 10;
+  const backgroundColor3= "#ff1493";
+  
+  const icon4 = (
+    <CircularProgress style={{ fontSize: "2.2rem", color: "white" }} />
+  );
+  const heading4 = "Total Processing";
+  const backgroundColor4= "	#ffa500";
+  
 
   const [range, setRange] = React.useState([
     dayjs("2022-01-17"),
     dayjs("2023-04-21"),
   ]);
-  const startDate = range[0];
-  const endDate = range[1];
-  const filteredRows = rows.filter((row) => {
-    const rowDate = dayjs(row.OrderDate);
-    return rowDate.isBetween(startDate, endDate, null, "[]");
-  });
+  // const startDate = range[0];
+  // const endDate = range[1];
+  // const filteredRows = rows.filter((row) => {
+  //   const rowDate = dayjs(row.orderDate);
+  //   return rowDate.isBetween(startDate, endDate, null, "[]");
+  // });
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
@@ -138,108 +144,100 @@ export default function OrderHistory() {
   };
 
   return (
-   
-      <Box sx={{ margin: "1rem" }}>
-        
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-evenly",
-            marginTop: "2rem",
-          }}
-        >
-          <Paper sx={{ width: "80vw", height: "5rem" }}>
-            <Box sx={{ display: "flex" }}>
-              <h2 style={{ flexGrow: 1,margin:'1.2rem 0 0 1rem' }}>Order History</h2>
-              <DateRangePicker range={range} setRange={setRange} />
-            </Box>
-          </Paper>
-        </Box>
-
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-evenly",
-            marginTop: "2rem",
-            gap: 1,
-          }}
-        >
-          <Orders icon={icon1} heading={heading} totalOrder={totalOrder}/>
-          <Orders icon={icon2} heading={heading2} totalOrder={totalpending} />
-          <Orders
-            icon={icon3}
-            heading={heading3}
-            totalOrder={totalCancellation}
-           
-          />
-          <Orders
-            icon={icon4}
-            heading={heading4}
-            totalOrder={totalProcessing}
-           
-          />
-        </Box>
-        <Box sx={{display:'flex',justifyContent:'space-evenly',margin:'2rem'}}>
-          <Paper
-            elevation={1}
-            sx={{
-              width: "80vw",
-              height: "60vh",
-            }}
-          >
-            <h2 style={{ paddingLeft: "1rem", marginTop: "1rem" }}>
-              All Oders
+    <Sidebar>
+    <Box sx={{ margin: "1rem" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          marginTop: "2rem",
+        }}
+      >
+        <Paper sx={{ width: "80vw", height: "5rem" }}>
+          <Box sx={{ display: "flex" }}>
+            <h2 style={{ flexGrow: 1, margin: "1.2rem 0 0 1rem" }}>
+              Order History
             </h2>
-            <TableContainer sx={{ height: "48vh" }}>
-              <Table stickyHeader aria-label="sticky table">
-                <TableHead>
-                  <TableRow>
-                    {columns.map((column) => (
-                      <TableCell
-                        key={column.id}
-                        align={column.align}
-                        style={{ minWidth: column.minWidth }}
-                        sx={{ fontWeight: "bold" }}
-                      >
-                        {column.label}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {filteredRows
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => {
-                      return (
-                        <TableRow
-                          hover
-                          role="checkbox"
-                          tabIndex={-1}
-                          key={row.OrderBy}
-                        >
-                          <TableCell align="left">{row.OrderBy}</TableCell>
-                          <TableCell align="left">{row.OrderId}</TableCell>
-                          <TableCell>{row.OrderDate}</TableCell>
-                          <TableCell>{row.Amount}</TableCell>
-                          <TableCell>{row.Status}</TableCell>
-                        </TableRow>
-                      );
-                    })}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <TablePagination
-              rowsPerPageOptions={[25, 100]}
-              component="div"
-              count={filteredRows.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          </Paper>
-        </Box>
+            <DateRangePicker range={range} setRange={setRange} />
+          </Box>
+        </Paper>
       </Box>
-    
+
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          marginTop: "2rem",
+          gap: 1,
+        }}
+      >
+        <Orders icon={icon1} heading={heading} totalOrder={post} backgroundColor={backgroundColor1}/>
+        <Orders  icon={icon2} heading={heading2} totalOrder={totalPending} backgroundColor={backgroundColor2}/>
+        <Orders  icon={icon3} heading={heading3} totalOrder={totalCancellation} backgroundColor={backgroundColor3}/>
+        <Orders  icon={icon4} heading={heading4} totalOrder={totalProcessing} backgroundColor={backgroundColor4}/>
+      </Box>
+      <Box
+        sx={{ display: "flex", justifyContent: "space-evenly", margin: "2rem" }}
+      >
+        <Paper
+          elevation={1}
+          sx={{
+            width: "80vw",
+            height: "60vh",
+          }}
+        >
+          <h2 style={{ paddingLeft: "1rem", marginTop: "1rem" }}>All Oders</h2>
+          <TableContainer sx={{ height: "48vh" }}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  {columns.map((column) => (
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      style={{ minWidth: column.minWidth }}
+                      sx={{ fontWeight: "bold" }}
+                    >
+                      {column.label}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => {
+                    return (
+                      <TableRow
+                        hover
+                        role="checkbox"
+                        tabIndex={-1}
+                        key={row.orderId}
+                      >
+                      
+                        <TableCell  align="left">{row.userId}</TableCell>
+                        <TableCell align="left">{row.orderId}</TableCell>
+                        <TableCell>{row.orderDate}</TableCell>
+                        <TableCell>{row.total}</TableCell>
+                        <TableCell>{row.status}</TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[25, 100]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+      </Box>
+    </Box>
+    </Sidebar>
   );
 }

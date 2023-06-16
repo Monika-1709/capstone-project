@@ -1,20 +1,20 @@
 import { Grid } from "@mui/material";
 import React from "react";
-//import { useState } from "react";
+import { useState } from "react";
 import Paper from "@mui/material/Paper";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Divider from "@mui/material/Divider";
-// import axios from "axios";
-// const baseURL="http://localhost:8080/count/orders";
+import axios from "axios";
+const baseURL="http://localhost:8080/count/orders";
 
 function OrderData() {
-  // const [post, setPost]=useState(null);
+  const [post, setPost]=useState(null);
 
-  // React.useEffect(() => {
-  //   axios.get(baseURL).then((response) => {
-  //     setPost(response.data);
-  //   });
-  // }, []);
+  React.useEffect(() => {
+    axios.get(baseURL).then((response) => {
+      setPost(response.data);
+    });
+  }, []);
 
   
 
@@ -56,7 +56,7 @@ function OrderData() {
           }}
         >
           <p style={{ color: "gray" }}>Total Orders</p>
-          <h2 style={{ marginTop: "5px" }}>976k</h2>
+          <h2 style={{ marginTop: "5px" }}>{post}</h2>
         </Grid>
       </Grid>
       <Grid>

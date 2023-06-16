@@ -8,8 +8,8 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import ReactEcharts from "echarts-for-react";
-import { Box } from "@mui/material";
-
+import { Box, Grid } from "@mui/material";
+import Sidebar from "../SideBar/Sidebar";
 const op = {
   tooltip: {
     trigger: "axis",
@@ -155,7 +155,7 @@ export default function Transactions() {
 
   return (
    
-     
+      <Sidebar>
         <Box sx={{margin:'1rem'}}>
         <Box sx={{display:"flex",justifyContent:'space-evenly',marginTop:'2rem'}}>
         <Paper sx={{ width: "35vw", height: "40vh" }}>
@@ -237,6 +237,6 @@ export default function Transactions() {
           />
         </Paper>
         </Box>
-     
+      </Sidebar>
   );
 }

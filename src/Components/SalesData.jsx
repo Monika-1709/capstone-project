@@ -1,12 +1,22 @@
 import { Grid } from "@mui/material";
 import React from "react";
 import Paper from "@mui/material/Paper";
-
+import axios from "axios";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
-
+import { useState } from "react";
 import Divider from "@mui/material/Divider";
 
+const baseURL = "http://localhost:8080/count/sales/amount";
+
 function SalesData() {
+  const [post, setPost] = useState(null);
+
+  React.useEffect(() => {
+    axios.get(baseURL).then((response) => {
+      setPost(response.data);
+    });
+  }, []);
+
   return (
     <div>
       <Grid
@@ -45,7 +55,7 @@ function SalesData() {
           }}
         >
           <p style={{ color: "gray" }}>Total Sales</p>
-          <h2 style={{ marginTop: "5px" }}>INR 989k</h2>
+          <h2 style={{ marginTop: "5px" }}>INR {post}</h2>
         </Grid>
       </Grid>
       <Grid>

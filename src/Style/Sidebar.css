@@ -1,6 +1,6 @@
 .container{
     display:flex;
-    transition: all 0.5s;
+    transition: all 1s;
     padding-top: -20px;
 }
 .sidebar{
@@ -8,7 +8,7 @@
     background: rgb(35, 33, 33);
     color: rgba(194, 193, 193, 0.837);
     height: 100vh;
-    transition: all 0.5s;
+    transition: all 0.7s ease;
     /* border-radius: 0 25px 25px 0; */
 }
 .sidebar__child{
@@ -17,17 +17,18 @@
 .top_section{
     display: flex;
     align-items:center;
-    padding:20px 15px;
+    padding:18px 15px;
+    
 }
 .logo{
     font-size: 30px;
-    transition: all 0.5s;
+    transition: all 1s;
 }
 .bars{
     display: flex;
     font-size: 25px;
     margin-left: 50px;
-    transition: all 0.5s;
+    transition: all 1s;
     
 }
 .link{
@@ -36,20 +37,20 @@
     color:rgba(194, 193, 193, 0.837);
     padding: 0 0.7rem;
     margin: 0.5rem 0.5rem;
-    transition: all 0.5s;
+    transition: all 1s;
 }
 .link:hover{
     background: #464646;
     border-radius: 10px;
     align-items: center;
     color: white;
-    transition: all 0.5s;
+    transition: all 1s;
 }
 .active{
     background: #464646;
     border-radius: 10px;
     color:white;
-    transition: all 0.5s;
+    transition: all 1s;
 }
 
 .icon {

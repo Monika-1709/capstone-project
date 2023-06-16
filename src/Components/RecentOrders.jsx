@@ -1,121 +1,116 @@
 import * as React from "react";
+//import { useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { TableVirtuoso } from "react-virtuoso";
+//import Paper from "@mui/material/Paper";
 
-const sample = [
-  ["Monica", 23, "23-01-2023", 4000, "successful"],
-  ["John", 28, "24-01-2023", 3500, "pending"],
-  ["Emily", 32, "25-01-2023", 4800, "successful"],
-  ["David", 26, "26-01-2023", 3900, "successful"],
-  ["Sarah", 31, "27-01-2023", 4100, "successful"],
-  ["Michael", 29, "28-01-2023", 3800, "pending"],
-  ["Olivia", 27, "29-01-2023", 4200, "successful"],
-];
+// import TablePagination from "@mui/material/TablePagination";
+// import { TableVirtuoso } from "react-virtuoso";
+import axios from "axios";
 
-function createData(id, orderBy, orderId, date, cost, status) {
-  return { id, orderBy, orderId, date, cost, status };
-}
+const baseURL="http://localhost:8082/order/recent";
 
 const columns = [
   {
     width: 100,
-    label: "Order By",
-    dataKey: "orderBy",
-    numeric: "false",
+    label: "User ID",
   },
   {
     width: 100,
     label: "Order ID",
-    dataKey: "orderId",
-    numeric: true,
+  
   },
   {
     width: 100,
     label: "Date",
-    dataKey: "date",
-    numeric: "false",
+   
   },
   {
     width: 100,
     label: "Cost (Rs)",
-    dataKey: "cost",
+    
     numeric: true,
   },
   {
     width: 100,
     label: "Status",
-    dataKey: "status",
     numeric: false,
   },
 ];
 
-const rows = Array.from({ length: 10 }, (_, index) => {
-  const randomSelection = sample[Math.floor(Math.random() * sample.length)];
-  return createData(index, ...randomSelection);
-});
-
-const VirtuosoTableComponents = {
-  Scroller: React.forwardRef((props, ref) => (
-    <TableContainer component={Paper} {...props} ref={ref} />
-  )),
-  Table: (props) => (
-    <Table
-      {...props}
-      sx={{ borderCollapse: "separate", tableLayout: "fixed" }}
-    />
-  ),
-  TableHead,
-  TableRow: ({ item: _item, ...props }) => <TableRow {...props} />,
-  TableBody: React.forwardRef((props, ref) => (
-    <TableBody {...props} ref={ref} />
-  )),
-};
-
-function fixedHeaderContent() {
-  return (
-    <TableRow>
-      {columns.map((column) => (
-        <TableCell
-          key={column.dataKey}
-          variant="head"
-          style={{ width: column.width }}
-          sx={{
-            backgroundColor: "background.paper",
-            color: "gray",
-          }}
-        >
-          {column.label}
-        </TableCell>
-      ))}
-    </TableRow>
-  );
-}
-
-function rowContent(_index, row) {
-  return (
-    <React.Fragment>
-      {columns.map((column) => (
-        <TableCell key={column.dataKey}>{row[column.dataKey]}</TableCell>
-      ))}
-    </React.Fragment>
-  );
-}
 
 export default function RecentOrders() {
-  return (
-    <Paper style={{ height: 212, width: "100%" }} elevation={0}>
-      <TableVirtuoso
-        data={rows}
-        components={VirtuosoTableComponents}
-        fixedHeaderContent={fixedHeaderContent}
-        itemContent={rowContent}
-      />
-    </Paper>
+  const [post, setPost] = React.useState([]);
+  React.useEffect(() => {
+    axios.get(baseURL).then((response) => {
+      console.log(response.data);
+      setPost(response.data);
+    });
+  }, []);
+
+  // const [page, setPage] = React.useState(0);
+  // const [rowsPerPage, setRowsPerPage] = React.useState(25);
+
+  // const handleChangePage = (event, newPage) => {
+  //   setPage(newPage);
+  // };
+
+  // const handleChangeRowsPerPage = (event) => {
+  //   setRowsPerPage(+event.target.value);
+  //   setPage(0);
+  // };
+  return(
+    <div>
+    <TableContainer sx={{ height: "27vh" }}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  {columns.map((column) => (
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      style={{ minWidth: column.minWidth }}
+                      sx={{ fontWeight: "bold" }}
+                    >
+                      {column.label}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+              {post
+                  // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => {
+                    return (
+                      <TableRow
+                        hover
+                        role="checkbox"
+                        tabIndex={-1}
+                        key={row.orderId}
+                      >
+                        <TableCell align="left">{row.userId}</TableCell>
+                        <TableCell align="left">{row.orderId}</TableCell>
+                        <TableCell>{row.orderDate}</TableCell>
+                        <TableCell>{row.total}</TableCell>
+                        <TableCell>{row.status}</TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          {/* <TablePagination
+            component="div"
+            count={post.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          /> */}
+          </div>
   );
 }
