@@ -47,6 +47,7 @@ function Sidebar() {
             src={logo}
             style={{ display: isOpen ? "block" : "none", width: "10vw" }}
             className="logo"
+            alt="iamage"
           />
 
           {isOpen ? (
