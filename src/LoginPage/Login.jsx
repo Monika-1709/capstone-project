@@ -55,8 +55,9 @@ const Login = ({ handleChange }) => {
       <Box sx={{ width: "50%", backgroundColor: "#30D5C8" }}>
         <img
           src={shop}
-          alt="Image"
+          alt="error 404"
           style={{ width: "100%", height: "100vh" }}
+
         />
       </Box>
       <Box>
