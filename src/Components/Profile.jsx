@@ -69,8 +69,8 @@ function ProfileAvatar() {
             S
           </Avatar>
 
-          <Typography variant="body1">Name: Sajib Suprio</Typography>
-          <Typography variant="body1">Email: sajib12@gmail.com</Typography>
+          <Typography variant="body1"> Sajib Suprio</Typography>
+          <Typography variant="body1"> sajib12@gmail.com</Typography>
           <Link href='#'>Sign Out</Link>
         </Box>
       </Popover>

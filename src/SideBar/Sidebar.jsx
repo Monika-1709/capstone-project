@@ -4,11 +4,11 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import { NavLink } from "react-router-dom";
 import RateReviewIcon from "@mui/icons-material/RateReview";
-import { Divider } from "@mui/material";
+import { Outlet } from "react-router-dom";
 import logo from "../Image/logo.jpg";
 import "../Style/Sidebar.css";
 
-function Sidebar({ children }) {
+function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
   const toggle = () => setIsOpen(!isOpen);
 
@@ -69,7 +69,6 @@ function Sidebar({ children }) {
             </div>
           )}
         </div>
-      {/* <Divider sx={{background: `linear-gradient(to right, lightgray 30%, darkgray 50%, lightgray 70%)`,marginTop:'3px' }} />  */}
         <div className="sidebar__child">
           {menuItem.map((item, index) => (
             <NavLink
@@ -89,10 +88,9 @@ function Sidebar({ children }) {
           ))}
         </div>
       </div>
-      <main>{children}</main>
-      {/* <main>
+      <main>
         <Outlet />
-      </main> */}
+      </main>
     </div>
   );
 }

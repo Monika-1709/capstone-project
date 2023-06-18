@@ -12,12 +12,10 @@ import { Box } from "@mui/material";
 import Orders from "../Components/Orders";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import dayjs from "dayjs";
-import Sidebar from "../SideBar/Sidebar";
 import CancelIcon from "@mui/icons-material/Cancel";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
-
 
 const baseURL1 = "http://localhost:8082/count/delivered";
 const baseURL2 = "http://localhost:8082/count/processing";
@@ -57,68 +55,64 @@ const columns = [
   },
 ];
 
-
 export default function OrderHistory() {
+  const [post, setPost] = React.useState([]);
+  React.useEffect(() => {
+    axios.get(baseURL1).then((response) => {
+      console.log(response.data);
+      setPost(response.data);
+    });
+  }, []);
 
-    const [post, setPost] = React.useState([]);
-    React.useEffect(() => {
-      axios.get(baseURL1).then((response) => {
-        console.log(response.data);
-        setPost(response.data);
-      });
-    }, []);
+  const [totalPending, settotalPending] = React.useState([]);
+  React.useEffect(() => {
+    axios.get(baseURL3).then((response) => {
+      console.log(response.data);
+      settotalPending(response.data);
+    });
+  }, []);
 
-    const [totalPending, settotalPending] = React.useState([]);
-    React.useEffect(() => {
-      axios.get(baseURL3).then((response) => {
-        console.log(response.data);
-        settotalPending(response.data);
-      });
-    }, []);
+  const [totalCancellation, settotalCancellation] = React.useState([]);
+  React.useEffect(() => {
+    axios.get(baseURL4).then((response) => {
+      console.log(response.data);
+      settotalCancellation(response.data);
+    });
+  }, []);
 
-    const [totalCancellation, settotalCancellation] = React.useState([]);
-    React.useEffect(() => {
-      axios.get(baseURL4).then((response) => {
-        console.log(response.data);
-        settotalCancellation(response.data);
-      });
-    }, []);
+  const [totalProcessing, settotalProcessing] = React.useState([]);
+  React.useEffect(() => {
+    axios.get(baseURL2).then((response) => {
+      console.log(response.data);
+      settotalProcessing(response.data);
+    });
+  }, []);
 
-    const [totalProcessing, settotalProcessing] = React.useState([]);
-    React.useEffect(() => {
-      axios.get(baseURL2).then((response) => {
-        console.log(response.data);
-        settotalProcessing(response.data);
-      });
-    }, []);
-
-    const [rows ,setrows] = React.useState([]);
-    React.useEffect(() => {
-      axios.get(baseURL5).then((response) => {
-        console.log(response.data);
-        setrows(response.data);
-      });
-    }, []);
+  const [rows, setrows] = React.useState([]);
+  React.useEffect(() => {
+    axios.get(baseURL5).then((response) => {
+      console.log(response.data);
+      setrows(response.data);
+    });
+  }, []);
 
   const icon1 = <LocalShippingIcon style={{ fontSize: "2.2rem" }} />;
   const heading = "Total Delivery";
-  const backgroundColor1= "#4169e1";
-  
+  const backgroundColor1 = "#4169e1";
+
   const icon2 = <AccessTimeFilledIcon style={{ fontSize: "2.2rem" }} />;
   const heading2 = "Total Pending";
-  const backgroundColor2= "#228b22";
-  
+  const backgroundColor2 = "#228b22";
 
   const icon3 = <CancelIcon style={{ fontSize: "2.2rem" }} />;
   const heading3 = "Total Concellation";
-  const backgroundColor3= "#ff1493";
-  
+  const backgroundColor3 = "#ff1493";
+
   const icon4 = (
     <CircularProgress style={{ fontSize: "2.2rem", color: "white" }} />
   );
   const heading4 = "Total Processing";
-  const backgroundColor4= "	#ffa500";
-  
+  const backgroundColor4 = "	#ffa500";
 
   const [range, setRange] = React.useState([
     dayjs("2022-01-17"),
@@ -144,7 +138,6 @@ export default function OrderHistory() {
   };
 
   return (
-    <Sidebar>
     <Box sx={{ margin: "1rem" }}>
       <Box
         sx={{
@@ -153,13 +146,11 @@ export default function OrderHistory() {
           marginTop: "2rem",
         }}
       >
-        <Paper sx={{ width: "80vw", height: "5rem" }}>
-          <Box sx={{ display: "flex" }}>
-            <h2 style={{ flexGrow: 1, margin: "1.2rem 0 0 1rem" }}>
-              Order History
-            </h2>
-            <DateRangePicker range={range} setRange={setRange} />
-          </Box>
+        <Paper sx={{ width: "80vw", height: "5rem", display: "flex" }}>
+          <h2 style={{ flexGrow: 1, margin: "1.2rem 0 0 1rem" }}>
+            Order History
+          </h2>
+          <DateRangePicker range={range} setRange={setRange} />
         </Paper>
       </Box>
 
@@ -171,13 +162,37 @@ export default function OrderHistory() {
           gap: 1,
         }}
       >
-        <Orders icon={icon1} heading={heading} totalOrder={post} backgroundColor={backgroundColor1}/>
-        <Orders  icon={icon2} heading={heading2} totalOrder={totalPending} backgroundColor={backgroundColor2}/>
-        <Orders  icon={icon3} heading={heading3} totalOrder={totalCancellation} backgroundColor={backgroundColor3}/>
-        <Orders  icon={icon4} heading={heading4} totalOrder={totalProcessing} backgroundColor={backgroundColor4}/>
+        <Orders
+          icon={icon1}
+          heading={heading}
+          totalOrder={post}
+          backgroundColor={backgroundColor1}
+        />
+        <Orders
+          icon={icon2}
+          heading={heading2}
+          totalOrder={totalPending}
+          backgroundColor={backgroundColor2}
+        />
+        <Orders
+          icon={icon3}
+          heading={heading3}
+          totalOrder={totalCancellation}
+          backgroundColor={backgroundColor3}
+        />
+        <Orders
+          icon={icon4}
+          heading={heading4}
+          totalOrder={totalProcessing}
+          backgroundColor={backgroundColor4}
+        />
       </Box>
       <Box
-        sx={{ display: "flex", justifyContent: "space-evenly", margin: "2rem" }}
+        sx={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          margin: "2rem",
+        }}
       >
         <Paper
           elevation={1}
@@ -214,8 +229,7 @@ export default function OrderHistory() {
                         tabIndex={-1}
                         key={row.orderId}
                       >
-                      
-                        <TableCell  align="left">{row.userId}</TableCell>
+                        <TableCell align="left">{row.userId}</TableCell>
                         <TableCell align="left">{row.orderId}</TableCell>
                         <TableCell>{row.orderDate}</TableCell>
                         <TableCell>{row.total}</TableCell>
@@ -238,6 +252,5 @@ export default function OrderHistory() {
         </Paper>
       </Box>
     </Box>
-    </Sidebar>
   );
 }

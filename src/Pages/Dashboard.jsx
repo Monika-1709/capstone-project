@@ -1,16 +1,13 @@
 import * as React from "react";
-import Grid from "@mui/material/Grid";
 import ReactEcharts from "echarts-for-react";
 import { Box, Paper } from "@mui/material";
 import RecentOrders from "../Components/RecentOrders";
 import Profile from "../Components/Profile";
-import Data1 from "../Components/OrderData";
-import SalesData from "../Components/SalesData";
-import UsersData from "../Components/UsersData";
-import Sidebar from "../SideBar/Sidebar";
+import Data from "../Components/Data";
 import axios from "axios";
-import OrderData from "../Components/OrderData";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 
 const  baseURL="http://localhost:8082/visitor/daily-count";
 const baseURL1 = "http://localhost:8082/count/delivered";
@@ -19,6 +16,10 @@ const baseURL3 = "http://localhost:8082/count/pending";
 const baseURL4 = "http://localhost:8082/count/canceled";
 const  baseURL5="http://localhost:8082/dispatch";
 const  baseURL6="http://localhost:8082/feedback/daily-count";
+const baseURL7 = "http://localhost:8080/count/orders";
+const baseURL8="http://localhost:8080/count/users";
+const baseURL9 = "http://localhost:8080/count/sales/amount";
+
 
 
 
@@ -82,7 +83,30 @@ export default function Dashboard() {
       setreviews (response.data);
     });
   }, []);
+  
+  const [totalOrder, settotalOrder]=React.useState(null);
 
+  React.useEffect(() => {
+    axios.get(baseURL7).then((response) => {
+      settotalOrder(response.data);
+    });
+  }, []);
+
+  const [totalsales, settotalsales] =React.useState(null);
+
+  React.useEffect(() => {
+    axios.get(baseURL9).then((response) => {
+      settotalsales(response.data);
+    });
+  }, []);
+
+  const [totalUser, settotalUser]=React.useState(null);
+
+  React.useEffect(() => {
+    axios.get(baseURL8).then((response) => {
+      settotalUser(response.data);
+    });
+  }, []);
 
 
   const op = {
@@ -136,7 +160,7 @@ export default function Dashboard() {
           alignWithLabel: true,
         },
         axisLabel: {
-          interval: 0, // Display all labelste
+          interval: 0, 
          
         },
       },
@@ -196,10 +220,42 @@ export default function Dashboard() {
       },
     ],
   };
+  const icon1= <ShoppingCartIcon
+  style={{
+    color: "white",
+    fontSize: 35,
+    marginLeft: "14px",
+    marginTop: "12px",}}  />;
+  const backgroundColor1='#228b22';
+  const heading1='Total Orders';
+  const percentage1='+50%';
+  
+
+  const icon2= <SupervisorAccountIcon
+  style={{
+    color: "white",
+    fontSize: 35,
+    marginLeft: "14px",
+    marginTop: "12px",}}  />;
+  const backgroundColor2='#4169e1';
+  const heading2='Total User';
+  const percentage2='+5%';
+  
+
+  const icon3= <CurrencyRupeeIcon
+  style={{
+    color: "white",
+    fontSize: 35,
+    marginLeft: "14px",
+    marginTop: "12px",}}  />;
+  const backgroundColor3='#ff1493';
+  const heading3='Total Sales';
+  const percentage3='+10%';
+  
 
   return (
-    <Sidebar>
-      <Box>
+   
+      <Box sx={{}}>
         <Paper
           elevation={0}
           variant="outlined"
@@ -235,20 +291,20 @@ export default function Dashboard() {
               elevation={3}
               sx={{ width: "26vw", height: "16.5vh", borderRadius: "5px" }}
             >
-              <OrderData />
+              <Data   icon={icon1}backgroundColor={backgroundColor1} heading={heading1} percentage={percentage1} number={totalOrder}/>
             </Paper>
 
             <Paper
               elevation={3}
               sx={{ width: "26vw", height: "16.5vh", borderRadius: "5px" }}
             >
-              <UsersData />
+              <Data   icon={icon2}backgroundColor={backgroundColor2} heading={heading2} percentage={percentage2} number={totalUser}/>
             </Paper>
             <Paper
               elevation={3}
               sx={{ width: "26vw", height: "16.5vh", borderRadius: "5px" }}
             >
-              <SalesData />
+              <Data   icon={icon3}backgroundColor={backgroundColor3} heading={heading3} percentage={percentage3} number={totalsales}/>
             </Paper>
           </Box>
           <Box
@@ -302,6 +358,6 @@ export default function Dashboard() {
           </Box>
         </Box>
       </Box>
-    </Sidebar>
+ 
   );
 }

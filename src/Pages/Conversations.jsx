@@ -8,7 +8,6 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import CustomTableRow from "../Components/CustomTableRow";
-import Sidebar from "../SideBar/Sidebar";
 import axios from "axios";
 import { Box } from "@mui/material";
 
@@ -44,7 +43,7 @@ export default function ColumnGroupingTable() {
 
   return (
   
-      <Sidebar>
+    
         
         <Box sx={{display:'flex',justifyContent:'space-evenly',margin:'2rem'}}>
         <Paper sx={{ width: "80vw" }}>
@@ -99,7 +98,7 @@ export default function ColumnGroupingTable() {
           />
         </Paper>
         </Box>
-      </Sidebar>
+     
    
   );
 }

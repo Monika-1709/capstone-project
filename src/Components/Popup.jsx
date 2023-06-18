@@ -9,8 +9,7 @@ import {
 import { Button } from "@mui/material";
 
 function Popup({ openPopup, children, onClick }) {
-  // const { openPopup, children, onClick } = props;
-
+ 
   const messages = children.map((message) => {
     return (
       <>

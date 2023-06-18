@@ -8,8 +8,8 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import ReactEcharts from "echarts-for-react";
-import { Box, Grid } from "@mui/material";
-import Sidebar from "../SideBar/Sidebar";
+import { Box } from "@mui/material";
+
 const op = {
   tooltip: {
     trigger: "axis",
@@ -98,49 +98,46 @@ const rows = [
   createData("SBI10407", "March 30,2022", 2000, "Successful"),
 ];
 
-export default function Transactions() {
+export default function Tra() {
   const option = {
     tooltip: {
-      trigger: 'item'
+      trigger: "item",
     },
     legend: {
       orient: "vertical",
-    left: "left",
-    top: "middle",
-    
-      
+      left: "left",
+      top: "middle",
     },
     series: [
       {
-        name: 'Access From',
-        type: 'pie',
-        radius: ['45%', '80%'],
+        name: "Access From",
+        type: "pie",
+        radius: ["45%", "80%"],
         avoidLabelOverlap: false,
         label: {
           show: false,
-          position: 'center'
+          position: "center",
         },
         emphasis: {
           label: {
             show: true,
             fontSize: 40,
-            fontWeight: 'bold'
-          }
+            fontWeight: "bold",
+          },
         },
         labelLine: {
-          show: false
+          show: false,
         },
         data: [
-          { value: 1048, name: 'successful' },
-          { value: 735, name: 'Pending' },
-          
-          { value: 484, name: 'failed' },
-          
-        ]
-      }
-    ]
+          { value: 1048, name: "successful" },
+          { value: 735, name: "Pending" },
+
+          { value: 484, name: "failed" },
+        ],
+      },
+    ],
   };
-  
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -154,89 +151,91 @@ export default function Transactions() {
   };
 
   return (
-   
-      <Sidebar>
-        <Box sx={{margin:'1rem'}}>
-        <Box sx={{display:"flex",justifyContent:'space-evenly',marginTop:'2rem'}}>
+    <Box sx={{ margin: "1rem" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          marginTop: "2rem",
+        }}
+      >
         <Paper sx={{ width: "35vw", height: "40vh" }}>
-            <h2 style={{ paddingLeft: "2rem", paddingTop: "1rem" }}>Status</h2>
-            <ReactEcharts option={option} />
-          </Paper>
+          <h2 style={{ paddingLeft: "2rem", paddingTop: "1rem" }}>Status</h2>
+          <ReactEcharts option={option} />
+        </Paper>
 
-          <Paper sx={{ width: "40vw", height: "40vh" }}>
-            <h2 style={{ paddingLeft: "2rem", paddingTop: "1rem" }}>Amount</h2>
-            <ReactEcharts
-              option={op}
-              style={{ height: "280px", width: "550px", paddingLeft: "2rem" }}
-            />
-          </Paper>
-
-        </Box>
-        <Paper
-          sx={{
-            width: "94%",
-            marginLeft: "2.5rem",
-            marginTop: "2rem",
-            height: "51vh",
-          }}
-        >
-          <h2
-            style={{
-              paddingLeft: "1rem",
-              paddingTop: "1rem",
-              paddingBottom: "1rem",
-            }}
-          >
-            Transaction History
-          </h2>
-          <TableContainer sx={{ maxHeight: 340 }}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  {columns.map((column) => (
-                    <TableCell
-                      key={column.id}
-                      align={column.align}
-                      style={{ minWidth: column.minWidth }}
-                      sx={{ fontWeight: "bold", color: "gray" }}
-                    >
-                      {column.label}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => {
-                    return (
-                      <TableRow
-                        hover
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={row.TrannsactionId}
-                      >
-                        <TableCell align="left">{row.TrannsactionId}</TableCell>
-                        <TableCell>{row.Date}</TableCell>
-                        <TableCell>{row.Amount}</TableCell>
-                        <TableCell>{row.Status}</TableCell>
-                      </TableRow>
-                    );
-                  })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
+        <Paper sx={{ width: "40vw", height: "40vh" }}>
+          <h2 style={{ paddingLeft: "2rem", paddingTop: "1rem" }}>Amount</h2>
+          <ReactEcharts
+            option={op}
+            style={{ height: "280px", width: "550px", paddingLeft: "2rem" }}
           />
         </Paper>
-        </Box>
-      </Sidebar>
+      </Box>
+      <Paper
+        sx={{
+          width: "94%",
+          marginLeft: "2.5rem",
+          marginTop: "2rem",
+          height: "51vh",
+        }}
+      >
+        <h2
+          style={{
+            paddingLeft: "1rem",
+            paddingTop: "1rem",
+            paddingBottom: "1rem",
+          }}
+        >
+          Transaction History
+        </h2>
+        <TableContainer sx={{ maxHeight: 340 }}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                {columns.map((column) => (
+                  <TableCell
+                    key={column.id}
+                    align={column.align}
+                    style={{ minWidth: column.minWidth }}
+                    sx={{ fontWeight: "bold", color: "gray" }}
+                  >
+                    {column.label}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row) => {
+                  return (
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={row.TrannsactionId}
+                    >
+                      <TableCell align="left">{row.TrannsactionId}</TableCell>
+                      <TableCell>{row.Date}</TableCell>
+                      <TableCell>{row.Amount}</TableCell>
+                      <TableCell>{row.Status}</TableCell>
+                    </TableRow>
+                  );
+                })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Paper>
+    </Box>
   );
 }

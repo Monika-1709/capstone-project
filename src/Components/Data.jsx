@@ -1,23 +1,11 @@
 import { Grid } from "@mui/material";
 import React from "react";
-import { useState } from "react";
 import Paper from "@mui/material/Paper";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Divider from "@mui/material/Divider";
-import axios from "axios";
-const baseURL="http://localhost:8080/count/orders";
 
-function OrderData() {
-  const [post, setPost]=useState(null);
-
-  React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
-      setPost(response.data);
-    });
-  }, []);
-
+function OrderData(props) {
+  const { icon, backgroundColor, heading, percentage, number } = props;
   
-
   return (
     <div>
       <Grid
@@ -34,18 +22,11 @@ function OrderData() {
               width: 70,
               height: 65,
               padding: "4px",
-              backgroundColor: "	#228b22",
+              backgroundColor: backgroundColor,
               borderRadius: "10px",
             }}
           >
-            <ShoppingCartIcon
-              style={{
-                color: "white",
-                fontSize: 35,
-                marginLeft: "14px",
-                marginTop: "12px",
-              }}
-            />
+            {icon}
           </Paper>
         </Grid>
         <Grid
@@ -55,8 +36,8 @@ function OrderData() {
             marginTop: "1.5rem",
           }}
         >
-          <p style={{ color: "gray" }}>Total Orders</p>
-          <h2 style={{ marginTop: "5px" }}>{post}</h2>
+          <p style={{ color: "gray" }}>{heading}</p>
+          <h2 style={{ marginTop: "5px" }}>{number}</h2>
         </Grid>
       </Grid>
       <Grid>
@@ -73,7 +54,7 @@ function OrderData() {
           spacing={2}
           sx={{ width: "14vw", marginLeft: "0px", marginTop: "1.4px" }}
         >
-          <p style={{ color: "#32cd32" }}>+50%</p> &nbsp;&nbsp;
+          <p style={{ color: "#32cd32" }}>{percentage}</p> &nbsp;&nbsp;
           <p style={{ color: "gray" }}>than last week</p>
         </Grid>
         <p style={{ marginLeft: "2rem", color: "gray" }}>20 January,2023</p>
