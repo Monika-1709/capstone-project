@@ -47,6 +47,11 @@ const columns = [
     label: "Status",
     minWidth: 170,
   },
+  // {
+  //   id: "dtails",
+  //   label: "Details",
+  //   minWidth: 170,
+  // },
 ];
 
 export default function OrderHistory() {

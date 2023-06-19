@@ -22,7 +22,7 @@ export default function CustomTableRow({ name, phone,date, stime, etime, chat })
       <TableCell>{etime}</TableCell>
       <TableCell>
         <Button variant="outlined" onClick={handleOpen}>
-          Open dialog
+       View Conversations
         </Button>
         <Popup
           openPopup={popup}

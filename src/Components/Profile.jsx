@@ -53,14 +53,16 @@ function ProfileAvatar() {
         }}
       >
         <Box
-          style={{
+          sx={{
             padding: "1rem",
-            width: "15vw",
+            width: "18vw",
+            backgroundColor:'	#e6e6fa'
+           
           }}
         >
           <Avatar
-            style={{
-              marginLeft: "3.5rem",
+            sx={{
+              marginLeft: "5rem",
               width: 50,
               height: 50,
               backgroundColor: "#4682b4",
@@ -69,9 +71,12 @@ function ProfileAvatar() {
             S
           </Avatar>
 
-          <Typography variant="body1"> Sajib Suprio</Typography>
-          <Typography variant="body1"> sajib12@gmail.com</Typography>
-          <Link href='#'>Sign Out</Link>
+          <Typography variant="body1" style={{paddingLeft:'4rem'}}> Sajib Suprio</Typography>
+          <Typography variant="body1" style={{paddingLeft:'3rem'}}> sajib12@gmail.com</Typography>
+          <Button variant="contained" size="small" style={{color:'black',marginLeft:'4.5rem',marginTop:'1rem'}}>
+
+          <Link href='#' >Sign Out</Link>
+          </Button>
         </Box>
       </Popover>
     </>

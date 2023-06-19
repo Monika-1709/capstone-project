@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import {  BrowserRouter, Routes, Route} from 'react-router-dom';
- import Sidebar from './SideBar/Sidebar.jsx'
+ import Sidebar from './Pages/Sidebar.jsx'
 import Dashboard from './Pages/Dashboard.jsx';
 import OrderHistory from './Pages/OrderHistory.jsx';
 import Transactions from './Pages/Transactions.jsx';
