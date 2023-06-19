@@ -15,13 +15,7 @@ import dayjs from "dayjs";
 import CancelIcon from "@mui/icons-material/Cancel";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import CircularProgress from "@mui/material/CircularProgress";
-import axios from "axios";
-
-const baseURL1 = "http://localhost:8082/count/delivered";
-const baseURL2 = "http://localhost:8082/count/processing";
-const baseURL3 = "http://localhost:8082/count/pending";
-const baseURL4 = "http://localhost:8082/count/canceled";
-const baseURL5 = "http://localhost:8082/order";
+import { myAxios } from "../Services/Helper";
 
 const columns = [
   {
@@ -57,43 +51,83 @@ const columns = [
 
 export default function OrderHistory() {
   const [post, setPost] = React.useState([]);
+
   React.useEffect(() => {
-    axios.get(baseURL1).then((response) => {
-      console.log(response.data);
-      setPost(response.data);
-    });
+    const fetchData = async () => {
+      try {
+        const response = await myAxios.get("/count/delivered");
+        console.log(response);
+
+        setPost(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
   }, []);
 
   const [totalPending, settotalPending] = React.useState([]);
+
   React.useEffect(() => {
-    axios.get(baseURL3).then((response) => {
-      console.log(response.data);
-      settotalPending(response.data);
-    });
+    const fetchData = async () => {
+      try {
+        const response = await myAxios.get("/count/pending");
+        console.log(response);
+
+        settotalPending(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
   }, []);
 
   const [totalCancellation, settotalCancellation] = React.useState([]);
+
   React.useEffect(() => {
-    axios.get(baseURL4).then((response) => {
-      console.log(response.data);
-      settotalCancellation(response.data);
-    });
+    const fetchData = async () => {
+      try {
+        const response = await myAxios.get("/count/canceled");
+        console.log(response);
+
+        settotalCancellation(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
   }, []);
 
   const [totalProcessing, settotalProcessing] = React.useState([]);
+
   React.useEffect(() => {
-    axios.get(baseURL2).then((response) => {
-      console.log(response.data);
-      settotalProcessing(response.data);
-    });
+    const fetchData = async () => {
+      try {
+        const response = await myAxios.get("/count/processing");
+        console.log(response);
+
+        settotalProcessing(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
   }, []);
 
   const [rows, setrows] = React.useState([]);
+
   React.useEffect(() => {
-    axios.get(baseURL5).then((response) => {
-      console.log(response.data);
-      setrows(response.data);
-    });
+    const fetchData = async () => {
+      try {
+        const response = await myAxios.get("/order");
+        console.log(response);
+
+        setrows(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
   }, []);
 
   const icon1 = <LocalShippingIcon style={{ fontSize: "2.2rem" }} />;

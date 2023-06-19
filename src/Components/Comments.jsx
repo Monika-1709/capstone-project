@@ -2,18 +2,22 @@ import React from "react";
 import Avatar from "@mui/material/Avatar";
 import { Grid } from "@mui/material";
 import Rating from "@mui/material/Rating";
-import axios from "axios";
-
-const baseURL="http://localhost:8082/feedback";
+import { myAxios } from "../Services/Helper";
 
 function Comments({ startDate, endDate }) {
-
   const [post, setPost] = React.useState([]);
   React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
-      console.log(response.data);
-      setPost(response.data);
-    });
+    const fetchData = async () => {
+      try {
+        const response = await myAxios.get("feedback");
+        console.log(response);
+
+        setPost(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
   }, []);
   // const filteredRows = Post.filter((row) => {
   //   const rowDate = new Date(row.date);
@@ -45,12 +49,9 @@ function Comments({ startDate, endDate }) {
           <Grid sx={{ width: "350px", gap: "5px" }}>
             <h2>{row.userId}</h2>
             <p style={{ paddingTop: "8px", color: "gray" }}>
-              
-              Total spend: INR {Math.floor(Math.random()*500)+1000}
+              Total spend: INR {Math.floor(Math.random() * 500) + 1000}
             </p>
-            <p style={{ paddingTop: "3px", color: "gray" }}>
-              Total Reviews: 1
-            </p>
+            <p style={{ paddingTop: "3px", color: "gray" }}>Total Reviews: 1</p>
           </Grid>
           <Grid sx={{ width: "33vw", height: "15vh", paddingLeft: "10px" }}>
             <Grid
@@ -61,7 +62,7 @@ function Comments({ startDate, endDate }) {
               <Grid>
                 <Rating
                   name="rating-line"
-                  value={Math.floor(Math.random()*2)+4}
+                  value={Math.floor(Math.random() * 2) + 4}
                   precision={0.5}
                   size="small"
                   readOnly

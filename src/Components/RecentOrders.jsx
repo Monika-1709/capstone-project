@@ -10,9 +10,9 @@ import TableRow from "@mui/material/TableRow";
 
 // import TablePagination from "@mui/material/TablePagination";
 // import { TableVirtuoso } from "react-virtuoso";
-import axios from "axios";
+import { myAxios } from "../Services/Helper";
 
-const baseURL="http://localhost:8082/order/recent";
+
 
 const columns = [
   {
@@ -46,11 +46,19 @@ const columns = [
 export default function RecentOrders() {
   const [post, setPost] = React.useState([]);
   React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
-      console.log(response.data);
-      setPost(response.data);
-    });
+    const fetchData = async () => {
+      try {
+        const response = await myAxios.get("/order/recent");
+        console.log(response);
+
+        setPost(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
   }, []);
+
 
   // const [page, setPage] = React.useState(0);
   // const [rowsPerPage, setRowsPerPage] = React.useState(25);
