@@ -20,9 +20,9 @@ export default function CustomTableRow({ name, phone,date, stime, etime, chat, }
       <TableCell>{date}</TableCell>
       <TableCell>{stime}</TableCell>
       <TableCell>{etime}</TableCell>
-      <TableCell>
-        <Button variant="outlined" onClick={handleOpen}>
-       View Conversations
+      <TableCell sx={{display: 'flex', justifyContent: 'center'}}>
+        <Button variant="contained" onClick={handleOpen}>
+       View 
         </Button>
         <Popup
           openPopup={popup}

@@ -14,7 +14,7 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import dayjs from "dayjs";
 import CancelIcon from "@mui/icons-material/Cancel";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
-import CircularProgress from "@mui/material/CircularProgress";
+import HourglassFullIcon from '@mui/icons-material/HourglassFull';
 import {
   fetchDelivery,
   fetchPending,
@@ -22,7 +22,7 @@ import {
   fetchProcessing,
   fetchData,
 } from "../Services/Api";
-// import { fetchData } from "../Services/conversations-api";
+
 
 const columns = [
   {
@@ -54,91 +54,36 @@ const columns = [
     label: "Status",
     minWidth: 170,
   },
-  // {
-  //   id: "dtails",
-  //   label: "Details",
-  //   minWidth: 170,
-  // },
 ];
 
 export default function OrderHistory() {
   const [post, setdelivered] = React.useState([]);
 
   React.useEffect(() => {
-    // const fetchData = async () => {
-    //   try {
-    //     const response = await myAxios.get("/count/delivered");
-    //     console.log(response);
-
-    //     setPost(response.data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
     fetchDelivery(setdelivered);
   }, []);
 
   const [totalPending, settotalPending] = React.useState([]);
 
   React.useEffect(() => {
-    // const fetchData = async () => {
-    //   try {
-    //     const response = await myAxios.get("/count/pending");
-    //     console.log(response);
-
-    //     settotalPending(response.data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
     fetchPending(settotalPending);
   }, []);
 
   const [totalCancellation, settotalCancellation] = React.useState([]);
 
   React.useEffect(() => {
-    // const fetchData = async () => {
-    //   try {
-    //     const response = await myAxios.get("/count/canceled");
-    //     console.log(response);
-
-    //     settotalCancellation(response.data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
     fetchCancellation(settotalCancellation);
   }, []);
 
   const [totalProcessing, settotalProcessing] = React.useState([]);
 
   React.useEffect(() => {
-    // const fetchData = async () => {
-    //   try {
-    //     const response = await myAxios.get("/count/processing");
-    //     console.log(response);
-
-    //     settotalProcessing(response.data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
     fetchProcessing(settotalProcessing);
   }, []);
 
   const [rows, setrows] = React.useState([]);
 
   React.useEffect(() => {
-    // const fetchData = async () => {
-    //   try {
-    //     const response = await myAxios.get("/order");
-    //     console.log(response);
-
-    //     setrows(response.data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
     fetchData(setrows);
   }, []);
 
@@ -155,7 +100,7 @@ export default function OrderHistory() {
   const backgroundColor3 = "#ff1493";
 
   const icon4 = (
-    <CircularProgress style={{ fontSize: "2.2rem", color: "white" }} />
+    <HourglassFullIcon style={{ fontSize: "2.2rem", color: "white" }} />
   );
   const heading4 = "Total Processing";
   const backgroundColor4 = "	#ffa500";
