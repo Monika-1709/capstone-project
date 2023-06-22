@@ -25,7 +25,7 @@ function Sidebar() {
     },
     {
       path: "/orderhistory",
-      name: "OrderHistory",
+      name: "Orders",
       icon: <FaListAlt />,
     },
     {

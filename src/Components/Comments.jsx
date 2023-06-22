@@ -2,23 +2,9 @@ import React from "react";
 import Avatar from "@mui/material/Avatar";
 import { Grid } from "@mui/material";
 import Rating from "@mui/material/Rating";
-import { myAxios } from "../Services/Helper";
 
-function Comments({ startDate, endDate }) {
-  const [post, setPost] = React.useState([]);
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await myAxios.get("feedback");
-        console.log(response);
-
-        setPost(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
+function Comments({ startDate, endDate ,post}) {
+  
   // const filteredRows = Post.filter((row) => {
   //   const rowDate = new Date(row.date);
   //   return rowDate >= new Date(startDate) && rowDate <= new Date(endDate);

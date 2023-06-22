@@ -159,12 +159,12 @@ export default function Tra() {
           marginTop: "2rem",
         }}
       >
-        <Paper sx={{ width: "35vw", height: "40vh" }}>
+        <Paper sx={{ width: "45%", height: "40vh" }}>
           <h2 style={{ paddingLeft: "2rem", paddingTop: "1rem" }}>Status</h2>
           <ReactEcharts option={option} />
         </Paper>
 
-        <Paper sx={{ width: "40vw", height: "40vh" }}>
+        <Paper sx={{ width: "45%", height: "40vh" }}>
           <h2 style={{ paddingLeft: "2rem", paddingTop: "1rem" }}>Amount</h2>
           <ReactEcharts
             option={op}

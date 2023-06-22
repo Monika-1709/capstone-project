@@ -7,15 +7,16 @@ import {
   DialogContentText,
 } from "@mui/material";
 import { Button } from "@mui/material";
+import Divider from "@mui/material/Divider";
 
 function Popup({ openPopup, children, onClick }) {
  
   const messages = children.map((message) => {
     return (
       <>
-        <DialogContentText>Human : {message["human"]}</DialogContentText>
+        <DialogContentText sx={{}}>Human : {message["human"]}</DialogContentText>
         <br />
-        <DialogContentText>Bot : {message["bot"]}</DialogContentText>
+        <DialogContentText sx={{color:'	#4169e1'}}>Bot : {message["bot"]}</DialogContentText>
         <br />
       </>
     );
@@ -24,9 +25,11 @@ function Popup({ openPopup, children, onClick }) {
   return (
     <Dialog open={openPopup} scroll="paper">
       <DialogTitle>Chat History</DialogTitle>
+      <Divider />
       <DialogContent>
         <DialogContentText>{messages}</DialogContentText>
       </DialogContent>
+      <Divider />
       <DialogActions>
         <Button onClick={onClick}>close</Button>
       </DialogActions>

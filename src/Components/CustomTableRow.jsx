@@ -2,7 +2,7 @@ import { Button, TableCell, TableRow } from "@mui/material";
 import { useState } from "react";
 import Popup from "./Popup";
 
-export default function CustomTableRow({ name, phone,date, stime, etime, chat }) {
+export default function CustomTableRow({ name, phone,date, stime, etime, chat, }) {
   const [popup, setPopup] = useState(false);
 
   function handleOpen() {

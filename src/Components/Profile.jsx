@@ -56,7 +56,6 @@ function ProfileAvatar() {
           sx={{
             padding: "1rem",
             width: "18vw",
-            backgroundColor:'	#e6e6fa'
            
           }}
         >

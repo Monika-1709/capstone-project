@@ -4,11 +4,17 @@ import Rating from "@mui/material/Rating";
 import { Box, Paper } from "@mui/material";
 import DateRangePicker from "../Components/DateRangePicker";
 import Comments from "../Components/Comments";
+import { fetchComments } from "../Services/Api";
 
 function Reviews() {
+  const [post, setPost] = React.useState([]);
+  React.useEffect(() => {
+    fetchComments(setPost);
+  }, []);
+
   const [range, setRange] = React.useState([
-    dayjs("2025-01-17"),
-    dayjs("2025-04-21"),
+    dayjs("2022-01-17"),
+    dayjs("2023-04-21"),
   ]);
   const startDate = range[0];
   const endDate = range[1];
@@ -175,7 +181,7 @@ function Reviews() {
             overflowY: "auto",
           }}
         >
-          <Comments startDate={startDate} endDate={endDate} />
+          <Comments startDate={startDate} endDate={endDate} post={post} />
         </Paper>
       </Box>
     </Box>

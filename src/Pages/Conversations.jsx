@@ -9,9 +9,10 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import CustomTableRow from "../Components/CustomTableRow";
 import DateRangePicker from "../Components/DateRangePicker";
-import { myAxios } from "../Services/Helper";
+
 import dayjs from "dayjs";
 import { Box } from "@mui/material";
+import { fetchConversation } from "../Services/Api";
 
 const columns = [
   { id: "name", label: "Conversations Id", minWidth: 170 },
@@ -23,20 +24,10 @@ const columns = [
 ];
 
 export default function ColumnGroupingTable() {
-  const [post, setPost] = React.useState([]);
+  const [post, setConversations] = React.useState([]);
 
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await myAxios.get("/conversation");
-        console.log(response);
-
-        setPost(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+    fetchConversation(setConversations);
   }, []);
 
   const [range, setRange] = React.useState([
@@ -67,10 +58,12 @@ export default function ColumnGroupingTable() {
     <Box
       sx={{ display: "flex", justifyContent: "space-evenly", margin: "1rem" }}
     >
-      <Paper sx={{ width: "80vw" ,marginTop:'1rem'}}>
-        <Box sx={{display:'flex'}}>
-        <h2 style={{ margin: "0.5rem 0 1rem 1rem" ,flexGrow:1}}>Conversations History</h2>
-        <DateRangePicker range={range} setRange={setRange} />
+      <Paper sx={{ width: "80vw", marginTop: "1rem" }}>
+        <Box sx={{ display: "flex" }}>
+          <h2 style={{ margin: "0.5rem 0 1rem 1rem", flexGrow: 1 }}>
+            Conversations History
+          </h2>
+          <DateRangePicker range={range} setRange={setRange} />
         </Box>
         <TableContainer sx={{ height: "80vh" }}>
           <Table stickyHeader aria-label="sticky table">
@@ -90,7 +83,7 @@ export default function ColumnGroupingTable() {
             </TableHead>
             <TableBody>
               {filteredRows.length > 0 ? (
-               filteredRows
+                filteredRows
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, index) => (
                     <CustomTableRow

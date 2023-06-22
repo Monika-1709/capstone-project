@@ -1,5 +1,16 @@
 import * as React from "react";
-import { myAxios } from "../Services/Helper";
+import {
+  fetchDelivery,
+  fetchVisitors,
+  fetchPending,
+  fetchCancellation,
+  fetchProcessing,
+  fetchDispatch,
+  fetchreviews,
+  fetchOrder,
+  fetchTotalsales,
+  fetchTotalUser,
+} from "../Services/Api";
 import ReactEcharts from "echarts-for-react";
 import { Box, Paper } from "@mui/material";
 import RecentOrders from "../Components/RecentOrders";
@@ -8,165 +19,78 @@ import Data from "../Components/Data";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
+import { myAxios } from "../Services/Api";
 
 export default function Dashboard() {
+  const [post, setPost] = React.useState([]);
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await myAxios.get("/order/recent");
+        console.log(response);
+
+        setPost(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
   const [visitor, setVisitor] = React.useState([]);
 
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await myAxios.get("/visitor/daily-count");
-        console.log(response);
-
-        setVisitor(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+    fetchVisitors(setVisitor);
   }, []);
 
   const [delivered, setdelivered] = React.useState([]);
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await myAxios.get("/count/delivered");
-        console.log(response);
 
-        setdelivered(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+  React.useEffect(() => {
+    fetchDelivery(setdelivered);
   }, []);
 
   const [totalPending, settotalPending] = React.useState([]);
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await myAxios.get("/count/pending");
-        console.log(response);
 
-        settotalPending(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+  React.useEffect(() => {
+    fetchPending(settotalPending);
   }, []);
 
   const [totalCancellation, settotalCancellation] = React.useState([]);
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await myAxios.get("/count/canceled");
-        console.log(response);
 
-        settotalCancellation(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+  React.useEffect(() => {
+    fetchCancellation(settotalCancellation);
   }, []);
 
   const [totalProcessing, settotalProcessing] = React.useState([]);
 
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await myAxios.get("/count/processing");
-        console.log(response);
-
-        settotalProcessing(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+    fetchProcessing(settotalProcessing);
   }, []);
 
   const [totalDispatch, settotalDispatch] = React.useState([]);
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await myAxios.get("/count/dispatch");
-        console.log(response);
-
-        settotalDispatch(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+    fetchDispatch(settotalDispatch);
   }, []);
 
   const [review, setreviews] = React.useState([]);
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await myAxios.get("/feedback/daily-count");
-        console.log(response);
-
-        setreviews(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+    fetchreviews(setreviews);
   }, []);
-  
 
   const [totalOrder, settotalOrder] = React.useState(null);
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await myAxios.get("/count/orders");
-        console.log(response);
-
-        settotalOrder(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+    fetchOrder(settotalOrder);
   }, []);
-
 
   const [totalsales, settotalsales] = React.useState(null);
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await myAxios.get("/count/sales/amount");
-        console.log(response);
-
-        settotalsales(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+    fetchTotalsales(settotalsales);
   }, []);
-
-  
 
   const [totalUser, settotalUser] = React.useState(null);
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await myAxios.get("/count/users");
-        console.log(response);
-
-        settotalUser(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+    fetchTotalUser(settotalUser);
   }, []);
-
-  
 
   const op = {
     tooltip: {
@@ -426,11 +350,11 @@ export default function Dashboard() {
             marginTop: "1.5rem",
           }}
         >
-          <Paper sx={{ width: "47.5vw", height: "29.5vh" }} elevation={3}>
+          <Paper sx={{ width: "47.5vw", height: "30.5vh" }} elevation={3}>
             <h2 style={{ paddingTop: "2%", paddingLeft: "15px" }}>
               Recent Orders
             </h2>
-            <RecentOrders />
+            <RecentOrders post={post} />
           </Paper>
 
           <Paper sx={{ width: "32.5vw", height: "29.5vh" }} elevation={3}>

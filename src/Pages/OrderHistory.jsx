@@ -15,7 +15,14 @@ import dayjs from "dayjs";
 import CancelIcon from "@mui/icons-material/Cancel";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import CircularProgress from "@mui/material/CircularProgress";
-import { myAxios } from "../Services/Helper";
+import {
+  fetchDelivery,
+  fetchPending,
+  fetchCancellation,
+  fetchProcessing,
+  fetchData,
+} from "../Services/Api";
+// import { fetchData } from "../Services/conversations-api";
 
 const columns = [
   {
@@ -55,84 +62,84 @@ const columns = [
 ];
 
 export default function OrderHistory() {
-  const [post, setPost] = React.useState([]);
+  const [post, setdelivered] = React.useState([]);
 
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await myAxios.get("/count/delivered");
-        console.log(response);
+    // const fetchData = async () => {
+    //   try {
+    //     const response = await myAxios.get("/count/delivered");
+    //     console.log(response);
 
-        setPost(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+    //     setPost(response.data);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
+    fetchDelivery(setdelivered);
   }, []);
 
   const [totalPending, settotalPending] = React.useState([]);
 
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await myAxios.get("/count/pending");
-        console.log(response);
+    // const fetchData = async () => {
+    //   try {
+    //     const response = await myAxios.get("/count/pending");
+    //     console.log(response);
 
-        settotalPending(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+    //     settotalPending(response.data);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
+    fetchPending(settotalPending);
   }, []);
 
   const [totalCancellation, settotalCancellation] = React.useState([]);
 
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await myAxios.get("/count/canceled");
-        console.log(response);
+    // const fetchData = async () => {
+    //   try {
+    //     const response = await myAxios.get("/count/canceled");
+    //     console.log(response);
 
-        settotalCancellation(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+    //     settotalCancellation(response.data);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
+    fetchCancellation(settotalCancellation);
   }, []);
 
   const [totalProcessing, settotalProcessing] = React.useState([]);
 
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await myAxios.get("/count/processing");
-        console.log(response);
+    // const fetchData = async () => {
+    //   try {
+    //     const response = await myAxios.get("/count/processing");
+    //     console.log(response);
 
-        settotalProcessing(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+    //     settotalProcessing(response.data);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
+    fetchProcessing(settotalProcessing);
   }, []);
 
   const [rows, setrows] = React.useState([]);
 
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await myAxios.get("/order");
-        console.log(response);
+    // const fetchData = async () => {
+    //   try {
+    //     const response = await myAxios.get("/order");
+    //     console.log(response);
 
-        setrows(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+    //     setrows(response.data);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
+    fetchData(setrows);
   }, []);
 
   const icon1 = <LocalShippingIcon style={{ fontSize: "2.2rem" }} />;
