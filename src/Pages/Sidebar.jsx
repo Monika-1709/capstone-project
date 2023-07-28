@@ -7,11 +7,13 @@ import RateReviewIcon from "@mui/icons-material/RateReview";
 import { Outlet } from "react-router-dom";
 import logo from "../Image/logo.jpg";
 import "../Style/Sidebar.css";
+import Profile from "../Components/Profile";
 
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
   const toggle = () => setIsOpen(!isOpen);
 
+ 
   const menuItem = [
     {
       path: "/dashboard",
@@ -70,6 +72,7 @@ function Sidebar() {
             </div>
           )}
         </div>
+        
         <div className="sidebar__child">
           {menuItem.map((item, index) => (
             <NavLink
@@ -87,6 +90,11 @@ function Sidebar() {
               </div>
             </NavLink>
           ))}
+        </div>
+        <div className="sidebar__bottom">
+          <div style={{ marginTop: "23.5rem" }}>
+            <Profile isOpen={isOpen} toggle={toggle} key={isOpen.toString() + toggle.toString()}/>
+          </div>
         </div>
       </div>
       <main>

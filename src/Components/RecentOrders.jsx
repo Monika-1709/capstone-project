@@ -6,7 +6,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
-
 const columns = [
   {
     width: 100,
@@ -34,7 +33,7 @@ const columns = [
 ];
 
 export default function RecentOrders(props) {
-  const {post}=props;
+  const { post } = props;
 
   return (
     <div>
@@ -47,7 +46,12 @@ export default function RecentOrders(props) {
                   key={column.id}
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
-                  sx={{ fontWeight: "bold" }}
+                  sx={{
+                    // fontWeight: "bold",
+                    fontSize:'25',
+                    color: "gray",
+                    // fontFamily: " Roboto, Helvetica, Arial, sans-serif",
+                  }}
                 >
                   {column.label}
                 </TableCell>
@@ -55,23 +59,55 @@ export default function RecentOrders(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {post
-              .map((row) => {
-                return (
-                  <TableRow
-                    hover
-                    role="checkbox"
-                    tabIndex={-1}
-                    key={row.orderId}
+            {post.map((row) => {
+              let statusColor = "";
+              let statusTextColor = "";
+
+              if (row.status === "Delivered") {
+                statusColor = "	#c7f1c7";
+                statusTextColor = "	#006400";
+              } else if (row.status === "Processing") {
+                statusColor = "		#e0ffff";
+                statusTextColor = "	#1e90ff";
+              } else if (row.status === "Cancelled") {
+                statusColor = "	#ffe4e1";
+                statusTextColor = "#FF0000";
+              } else if (row.status === "Dispatch") {
+                statusColor = "#fafad2";
+                statusTextColor = "		#ffa500";
+              } else if (row.status === "Pending") {
+                statusColor = "	#ffe4e1";
+                statusTextColor = "#FF0000";
+              }
+
+              return (
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.orderId}>
+                  <TableCell align="left">{row.userId}</TableCell>
+                  <TableCell align="left">{row.orderId}</TableCell>
+                  <TableCell>{row.orderDate}</TableCell>
+                  <TableCell>{row.total}</TableCell>
+
+                  <TableCell
+                    sx={{
+                      borderRadius: "4px",
+                      padding: 0, // Remove the default padding
+                    }}
                   >
-                    <TableCell align="left">{row.userId}</TableCell>
-                    <TableCell align="left">{row.orderId}</TableCell>
-                    <TableCell>{row.orderDate}</TableCell>
-                    <TableCell>{row.total}</TableCell>
-                    <TableCell>{row.status}</TableCell>
-                  </TableRow>
-                );
-              })}
+                    <span
+                      style={{
+                        backgroundColor: statusColor,
+                        color: statusTextColor,
+                        padding: "0.2rem", // Adjust the padding value as per your requirement
+                        borderRadius: "4px",
+                        display: "inline-block", // Display as an inline-block element
+                      }}
+                    >
+                      {row.status}
+                    </span>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>

@@ -4,7 +4,7 @@ import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
 
 function OrderData(props) {
-  const { icon, backgroundColor, heading, percentage, number } = props;
+  const { icon, backgroundColor, heading, percentage, number ,date} = props;
   
   return (
     <div>
@@ -57,7 +57,7 @@ function OrderData(props) {
           <p style={{ color: "#32cd32" }}>{percentage}</p> &nbsp;&nbsp;
           <p style={{ color: "gray" }}>than last week</p>
         </Grid>
-        <p style={{ marginLeft: "2rem", color: "gray" }}>20 January,2023</p>
+        <p style={{ marginLeft: "2rem", color: "gray" }}>{date}</p>
       </Grid>
     </div>
   );

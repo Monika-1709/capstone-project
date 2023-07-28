@@ -18,10 +18,10 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import shop from "../Image/shop.jpg";
+import { myAxios } from "../Services/backend-api";
 
 const Login = () => {
   const navigate = useNavigate();
-
   const initialValues = {
     username: "",
     password: "",
@@ -35,11 +35,11 @@ const Login = () => {
   });
   const onSubmit = (values, props) => {
     console.log(values);
-    setTimeout(() => {
-      props.resetForm();
-      props.setSubmitting(false);
+    myAxios.post("/login",values).then((response)=>response.data).then((response)=>{
       navigate("/dashboard");
-    }, 200);
+      console.log(response);
+    })
+
   };
 
   return (
@@ -126,6 +126,7 @@ const Login = () => {
                     <Link href="#">Forgot password ?</Link>
                   </Typography>
                 </Grid>
+                
                 <Button
                   type="submit"
                   variant="contained"
@@ -135,6 +136,9 @@ const Login = () => {
                     marginLeft: "4.5rem",
                     backgroundColor: "#30D5C8",
                     marginTop: "1rem",
+                    "&:hover": {
+                      backgroundColor: "#30D5C8",
+                    },
                   }}
                   disabled={props.isSubmitting}
                   fullWidth

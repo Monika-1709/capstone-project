@@ -10,6 +10,7 @@ export const fetchVisitors = async (setVisitor) => {
   try {
     const response = await myAxios.get("/visitor/daily-count");
     console.log(response);
+    console.log(setVisitor);
 
     setVisitor(response.data);
   } catch (error) {
@@ -115,6 +116,28 @@ export const fetchTotalUser = async (settotalUser) => {
   }
 };
 
+export const fetchDate = async (setDate) => {
+  try {
+    const response = await myAxios.get("/date");
+    console.log(response);
+
+    setDate(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchData1 = async (setPost) => {
+  try {
+    const response = await myAxios.get("/order/recent");
+    console.log(response);
+
+    setPost(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 //Review page API
 
 export const fetchComments = async (setPost) => {
@@ -128,6 +151,17 @@ export const fetchComments = async (setPost) => {
   }
 };
 
+export const fetchTotalReviews = async (setReviews) => {
+  try {
+    const response = await myAxios.get("/count/feedback");
+    console.log(response);
+
+    setReviews(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // Order page API
 
 export const fetchData = async (setrows) => {
@@ -135,7 +169,7 @@ export const fetchData = async (setrows) => {
     const response = await myAxios.get("/order");
     console.log(response);
 
-    setrows(response.data);
+    setrows(response.data.content);
   } catch (error) {
     console.log(error);
   }
@@ -144,12 +178,29 @@ fetchData();
 
 //Conversation page API
 
-export const fetchConversation = async (setConversations) => {
+export const fetchConversation = async (setConversations,setPost) => {
   try {
     const response = await myAxios.get("/conversation");
+    console.log(response.data);
+
+    setPost(response.data);
+    setConversations(response.data.content);
+    //  setPagebale(response.data.sort);
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+//Login 
+
+export const fetchLogin = async (setPost,values) => {
+  try {
+    const response = await myAxios.post("/login",values);
     console.log(response);
 
-    setConversations(response.data);
+    setPost(response.data);
   } catch (error) {
     console.log(error);
   }

@@ -10,31 +10,21 @@ import {
   fetchOrder,
   fetchTotalsales,
   fetchTotalUser,
-} from "../Services/Api";
+  fetchData1,
+  fetchDate,
+} from "../Services/backend-api";
 import ReactEcharts from "echarts-for-react";
 import { Box, Paper } from "@mui/material";
 import RecentOrders from "../Components/RecentOrders";
-import Profile from "../Components/Profile";
 import Data from "../Components/Data";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
-import { myAxios } from "../Services/Api";
 
 export default function Dashboard() {
   const [post, setPost] = React.useState([]);
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await myAxios.get("/order/recent");
-        console.log(response);
-
-        setPost(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+    fetchData1(setPost);
   }, []);
 
   const [visitor, setVisitor] = React.useState([]);
@@ -92,6 +82,13 @@ export default function Dashboard() {
     fetchTotalUser(settotalUser);
   }, []);
 
+  const [date, setDate] = React.useState(null);
+  React.useEffect(() => {
+    fetchDate(setDate);
+  }, []);
+
+  const reversedVisitor = [...visitor].reverse();
+
   const op = {
     tooltip: {
       trigger: "axis",
@@ -108,7 +105,7 @@ export default function Dashboard() {
     xAxis: {
       type: "category",
       boundaryGap: true,
-      data: visitor.map((item) => item._id),
+      data:reversedVisitor.map((item) => item._id),
     },
     yAxis: {
       type: "value",
@@ -118,7 +115,7 @@ export default function Dashboard() {
         name: "Visitors",
         type: "line",
         stack: "Total",
-        data: visitor.map((item) => item.count),
+        data:reversedVisitor.map((item) => item.count),
       },
     ],
   };
@@ -227,7 +224,7 @@ export default function Dashboard() {
     />
   );
   const backgroundColor2 = "#4169e1";
-  const heading2 = "Total User";
+  const heading2 = "Total Users";
   const percentage2 = "+5%";
 
   const icon3 = (
@@ -257,14 +254,14 @@ export default function Dashboard() {
               marginLeft: "3rem",
               fontFamily: "sans-serif",
               paddingTop: "1rem",
-              flexGrow: 1,
+              // flexGrow: 1,
               fontSize: "22px",
             }}
           >
             Welcome to Dashboard! <span>&#128588;</span>
           </p>
 
-          <Profile />
+          {/* <Profile /> */}
         </Box>
       </Paper>
 
@@ -287,6 +284,7 @@ export default function Dashboard() {
               heading={heading1}
               percentage={percentage1}
               number={totalOrder}
+              date={date}
             />
           </Paper>
 
@@ -300,6 +298,7 @@ export default function Dashboard() {
               heading={heading2}
               percentage={percentage2}
               number={totalUser}
+              date={date}
             />
           </Paper>
           <Paper
@@ -312,6 +311,7 @@ export default function Dashboard() {
               heading={heading3}
               percentage={percentage3}
               number={totalsales}
+              date={date}
             />
           </Paper>
         </Box>
@@ -324,7 +324,13 @@ export default function Dashboard() {
           }}
         >
           <Paper sx={{ width: "47.5vw", height: "34vh" }} elevation={3}>
-            <h2 style={{ paddingTop: "2%", paddingLeft: "20px" }}>
+            <h2
+              style={{
+                paddingTop: "2%",
+                paddingLeft: "20px",
+                fontFamily: "sans-serif",
+              }}
+            >
               Recent Visitors
             </h2>
             <ReactEcharts
@@ -333,7 +339,13 @@ export default function Dashboard() {
             />
           </Paper>
           <Paper sx={{ width: "32.5vw", height: "34vh" }} elevation={3}>
-            <h2 style={{ paddingTop: "1rem", paddingLeft: "1rem" }}>
+            <h2
+              style={{
+                paddingTop: "1rem",
+                paddingLeft: "1rem",
+                fontFamily: "sans-serif",
+              }}
+            >
               Order Status
             </h2>
             <ReactEcharts
@@ -351,14 +363,26 @@ export default function Dashboard() {
           }}
         >
           <Paper sx={{ width: "47.5vw", height: "30.5vh" }} elevation={3}>
-            <h2 style={{ paddingTop: "2%", paddingLeft: "15px" }}>
+            <h2
+              style={{
+                paddingTop: "1%",
+                paddingLeft: "15px",
+                fontFamily: "sans-serif",
+              }}
+            >
               Recent Orders
             </h2>
             <RecentOrders post={post} />
           </Paper>
 
           <Paper sx={{ width: "32.5vw", height: "29.5vh" }} elevation={3}>
-            <h2 style={{ paddingTop: "2%", paddingLeft: "15px" }}>
+            <h2
+              style={{
+                paddingTop: "2%",
+                paddingLeft: "15px",
+                fontFamily: "sans-serif",
+              }}
+            >
               Recent Reviews
             </h2>
             <ReactEcharts option={option2} style={{ height: "25vh" }} />

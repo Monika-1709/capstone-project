@@ -1,4 +1,4 @@
-import * as React from "react";
+// import * as React from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,6 +9,8 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import ReactEcharts from "echarts-for-react";
 import { Box } from "@mui/material";
+import React, { useState } from "react";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 const op = {
   tooltip: {
@@ -150,6 +152,12 @@ export default function Tra() {
     setPage(0);
   };
 
+  const [statusFilter, setStatusFilter] = useState("");
+
+  const filteredRows2 = rows.filter((row) =>
+    statusFilter === "" ? true : row.Status === statusFilter
+  );
+
   return (
     <Box sx={{ margin: "1rem" }}>
       <Box
@@ -160,12 +168,28 @@ export default function Tra() {
         }}
       >
         <Paper sx={{ width: "45%", height: "40vh" }}>
-          <h2 style={{ paddingLeft: "2rem", paddingTop: "1rem" }}>Status</h2>
+          <h2
+            style={{
+              paddingLeft: "2rem",
+              paddingTop: "1rem",
+              fontFamily: "serif",
+            }}
+          >
+            Status
+          </h2>
           <ReactEcharts option={option} />
         </Paper>
 
         <Paper sx={{ width: "45%", height: "40vh" }}>
-          <h2 style={{ paddingLeft: "2rem", paddingTop: "1rem" }}>Amount</h2>
+          <h2
+            style={{
+              paddingLeft: "2rem",
+              paddingTop: "1rem",
+              fontFamily: "serif",
+            }}
+          >
+            Amount
+          </h2>
           <ReactEcharts
             option={op}
             style={{ height: "280px", width: "550px", paddingLeft: "2rem" }}
@@ -180,15 +204,39 @@ export default function Tra() {
           height: "51vh",
         }}
       >
-        <h2
-          style={{
-            paddingLeft: "1rem",
-            paddingTop: "1rem",
-            paddingBottom: "1rem",
-          }}
-        >
-          Transaction History
-        </h2>
+        <Box sx={{ display: "flex" }}>
+          <h2
+            style={{
+              paddingLeft: "1rem",
+              paddingTop: "1rem",
+              paddingBottom: "1rem",
+              fontFamily: "serif",
+              flexGrow: 1,
+            }}
+          >
+            Transaction History
+          </h2>
+          <FormControl sx={{ m: 0.5, minWidth: 120 ,paddingTop:'0.5rem'}}>
+            <InputLabel htmlFor="status-filter">Status</InputLabel>
+            <Select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              label="Status Filter"
+              sx={{height:'2.5rem'}}
+              inputProps={{
+                name: "status-filter",
+                id: "status-filter",
+              }}
+            >
+              <MenuItem value="">All</MenuItem>
+              <MenuItem value="Successful">Successful</MenuItem>
+              <MenuItem value="Pending">Pending</MenuItem>
+              <MenuItem value="Failed">Failed</MenuItem>
+              {/* <MenuItem value="Processing">Processing</MenuItem>
+              <MenuItem value="Dispatch">Dispatch</MenuItem> */}
+            </Select>
+          </FormControl>
+        </Box>
         <TableContainer sx={{ maxHeight: 340 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
@@ -198,7 +246,12 @@ export default function Tra() {
                     key={column.id}
                     align={column.align}
                     style={{ minWidth: column.minWidth }}
-                    sx={{ fontWeight: "bold", color: "gray" }}
+                    sx={{
+                      fontWeight: "bold",
+                      color: "gray",
+
+                      fontFamily: "sans-serif",
+                    }}
                   >
                     {column.label}
                   </TableCell>
@@ -206,9 +259,22 @@ export default function Tra() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows
+              {filteredRows2
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
+                  let statusColor = "";
+                  let statusTextColor = "";
+
+                  if (row.Status === "Successful") {
+                    statusColor = "	#c7f1c7";
+                    statusTextColor = "	#006400";
+                  } else if (row.Status === "Pending") {
+                    statusColor = "#fafad2";
+                    statusTextColor = "	#ffa500";
+                  } else if (row.Status === "Failed") {
+                    statusColor = "	#ffe4e1";
+                    statusTextColor = "#FF0000";
+                  }
                   return (
                     <TableRow
                       hover
@@ -219,7 +285,24 @@ export default function Tra() {
                       <TableCell align="left">{row.TrannsactionId}</TableCell>
                       <TableCell>{row.Date}</TableCell>
                       <TableCell>{row.Amount}</TableCell>
-                      <TableCell>{row.Status}</TableCell>
+                      <TableCell
+                        sx={{
+                          borderRadius: "4px",
+                          // padding: 0,
+                        }}
+                      >
+                        <span
+                          style={{
+                            backgroundColor: statusColor,
+                            color: statusTextColor,
+                            padding: "0.2rem",
+                            borderRadius: "4px",
+                            display: "inline-block",
+                          }}
+                        >
+                          {row.Status}
+                        </span>
+                      </TableCell>
                     </TableRow>
                   );
                 })}

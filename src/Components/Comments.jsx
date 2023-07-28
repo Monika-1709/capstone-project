@@ -5,7 +5,7 @@ import Rating from "@mui/material/Rating";
 
 function Comments({ startDate, endDate ,post}) {
   
-  // const filteredRows = Post.filter((row) => {
+  // const filteredRows = post.filter((row) => {
   //   const rowDate = new Date(row.date);
   //   return rowDate >= new Date(startDate) && rowDate <= new Date(endDate);
   // });
@@ -33,11 +33,11 @@ function Comments({ startDate, endDate ,post}) {
             />
           </Grid>
           <Grid sx={{ width: "350px", gap: "5px" }}>
-            <h2>{row.userId}</h2>
+            <h2 style={{fontFamily:'serif'}}>{row.userName}</h2>
             <p style={{ paddingTop: "8px", color: "gray" }}>
-              Total spend: INR {Math.floor(Math.random() * 500) + 1000}
+              Total spend: INR{row.orderAmount}
             </p>
-            <p style={{ paddingTop: "3px", color: "gray" }}>Total Reviews: 1</p>
+            <p style={{ paddingTop: "3px", color: "gray" }}>Total Reviews:{row.feedBackCount} </p>
           </Grid>
           <Grid sx={{ width: "33vw", height: "15vh", paddingLeft: "10px" }}>
             <Grid

@@ -4,7 +4,9 @@ import Rating from "@mui/material/Rating";
 import { Box, Paper } from "@mui/material";
 import DateRangePicker from "../Components/DateRangePicker";
 import Comments from "../Components/Comments";
-import { fetchComments } from "../Services/Api";
+// import { Progress } from "antd";
+
+import { fetchComments, fetchTotalReviews } from "../Services/backend-api";
 
 function Reviews() {
   const [post, setPost] = React.useState([]);
@@ -12,9 +14,15 @@ function Reviews() {
     fetchComments(setPost);
   }, []);
 
+  const [reviews, setReviews] = React.useState([]);
+
+  React.useEffect(() => {
+    fetchTotalReviews(setReviews);
+  }, []);
+
   const [range, setRange] = React.useState([
     dayjs("2022-01-17"),
-    dayjs("2023-04-21"),
+    dayjs("2023-08-21"),
   ]);
   const startDate = range[0];
   const endDate = range[1];
@@ -30,7 +38,7 @@ function Reviews() {
             height: "9vh",
           }}
         >
-          <h1 style={{ flexGrow: 1, margin: "1rem 0 0 1rem" }}>Reviews</h1>
+          <h1 style={{ flexGrow: 1, margin: "1rem 0 0 1rem" ,fontFamily:'serif'}}>Reviews</h1>
           <DateRangePicker range={range} setRange={setRange} />
         </Paper>
       </Box>
@@ -52,7 +60,7 @@ function Reviews() {
           }}
         >
           <h4>Total Reviews</h4>
-          <h2 style={{ paddingTop: "1.2rem", fontSize: "30px" }}>10.0k</h2>
+          <h2 style={{ paddingTop: "1.2rem", fontSize: "30px" }}>{reviews}</h2>
           <p style={{ paddingTop: "3%", color: "gray" }}>
             Growth in reviews in this year
           </p>
@@ -75,10 +83,10 @@ function Reviews() {
               paddingTop: "1.2rem",
             }}
           >
-            4.0 &nbsp;
+            4.5 &nbsp;
             <Rating
               name="rating"
-              defaultValue={4}
+              defaultValue={4.5}
               precision={0.5}
               size="medium"
               readOnly
@@ -94,13 +102,19 @@ function Reviews() {
           sx={{
             width: "25vw",
             height: "18vh",
-            paddingTop: "1rem",
+            paddingTop: "0.5rem",
             paddingLeft: "2rem",
           }}
         >
-          <Box style={{ fontSize: "18px", fontWeight: "bold" }}>
+          <h3 >Users Rating</h3>
+          <Box
+            style={{
+              fontSize: "18px",
+              fontWeight: "bold",
+              paddingTop: "0.5rem",
+            }}
+          >
             {" "}
-            5
             <Rating
               name="rating-line"
               value={5}
@@ -109,11 +123,10 @@ function Reviews() {
               readOnly
               sx={{ paddingLeft: "10px" }}
             />
-            &nbsp;&nbsp;10.0k
+            &nbsp;&nbsp;6
           </Box>
           <Box style={{ fontSize: "18px", fontWeight: "bold" }}>
             {" "}
-            4
             <Rating
               name="rating-line"
               value={4}
@@ -122,11 +135,10 @@ function Reviews() {
               readOnly
               sx={{ paddingLeft: "10px" }}
             />
-            &nbsp;&nbsp;1.0k
+            &nbsp;&nbsp;5
           </Box>
           <Box style={{ fontSize: "18px", fontWeight: "bold" }}>
             {" "}
-            3
             <Rating
               name="rating-line"
               value={3}
@@ -135,11 +147,10 @@ function Reviews() {
               readOnly
               sx={{ paddingLeft: "10px" }}
             />
-            &nbsp;&nbsp;500
+            &nbsp;&nbsp;0
           </Box>
           <Box style={{ fontSize: "18px", fontWeight: "bold" }}>
             {" "}
-            2
             <Rating
               name="rating-line"
               value={2}
@@ -148,11 +159,10 @@ function Reviews() {
               readOnly
               sx={{ paddingLeft: "10px" }}
             />
-            &nbsp;&nbsp;20
+            &nbsp;&nbsp;0
           </Box>
           <Box style={{ fontSize: "18px", fontWeight: "bold" }}>
             {" "}
-            1
             <Rating
               name="rating-line"
               value={1}
@@ -161,7 +171,7 @@ function Reviews() {
               readOnly
               sx={{ paddingLeft: "10px" }}
             />
-            &nbsp;&nbsp;OK
+            &nbsp;&nbsp;0
           </Box>
         </Paper>
       </Box>
@@ -181,7 +191,7 @@ function Reviews() {
             overflowY: "auto",
           }}
         >
-          <Comments startDate={startDate} endDate={endDate} post={post} />
+          <Comments startDate={startDate} endDate={endDate} post={post}  />
         </Paper>
       </Box>
     </Box>
